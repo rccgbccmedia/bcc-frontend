@@ -11,14 +11,17 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end text-light">
     <ul class="navbar-nav">
-      <li class="nav-item"  data-aos="fade-up">
+      <li class="nav-item"  data-aos="fade-right">
           <router-link to="/" class="nav-link">Home</router-link>
       </li>
-      <li class="nav-item"  data-aos="fade-down">
+      <li class="nav-item"  data-aos="fade-right">
           <router-link to="About"  class="nav-link">About</router-link>
       </li>
       <li class="nav-item" data-aos="fade-right">
-           <router-link to="/gallery"  class="nav-link">Gallery</router-link>
+           <router-link to="/media"  class="nav-link">Media</router-link>
+      </li>
+      <li class="nav-item" data-aos="fade-right">
+           <router-link to="/events"  class="nav-link">Events</router-link>
       </li>
     </ul>
   </div>
@@ -38,7 +41,10 @@
           <router-link to="About"  class="nav-link">About</router-link>
       </li>
       <li class="nav-item py-2">
-           <router-link to="/gallery"  class="nav-link">Gallery</router-link>
+           <router-link to="/media"  class="nav-link">Media</router-link>
+      </li>
+      <li class="nav-item py-2">
+           <router-link to="/events"  class="nav-link">Events</router-link>
       </li>
     </ul>
   </div>
