@@ -67,9 +67,18 @@
 <hr>
 <h3  data-aos="zoom-in" class="section-title text-center py-4">OUR PROGRAMS</h3>
 <hr>
-<section>
+<section class="mt-4 pt-4">
 <events></events>
 </section>
+<div class="jumbotron mb-4" data-aos="flip-left"
+     data-aos-easing="ease-out-cubic"
+     data-aos-duration="1500">
+  <div class="container text-right">
+    <h1 class="display-4">Join Us Live</h1>
+    <p class="lead ml-4 pl-4">Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.  </p>
+     <router-link to="/live"  class="row justify-content-end mr-1"><button class="jumbo-btn">Join</button></router-link>
+  </div>
+</div>
 </div>
 </template>
 
@@ -90,9 +99,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 
 <style scoped>
-#theNav{
-  position: sticky;
-}
 .carousel-item{
   height: 20rem;
 }
@@ -131,6 +137,14 @@ span.special{
 }
 .media{
   margin: 5rem;
+}
+.jumbotron{
+  margin: 0rem 7rem;
+  background-image:  url('../assets/church-logo.png'), linear-gradient(to right, #e5e5f5, #bcbcf5, #8282f8);
+  background-blend-mode: soft-light, normal;
+  background-position-y: center;
+  background-size: 20%, 100%;
+  background-repeat: no-repeat;
 }
 .media p{
   letter-spacing: 1px;
@@ -176,12 +190,33 @@ span.special{
   transition: all 0.5s ease-in;
   border: 2px solid #1f1f1f;
 }
+*:any-link{
+  text-decoration: none;
+}
+.jumbo-btn{
+    padding: 5px 10px;
+    background-color: #8282f8 !important;
+    transition: all 0.5s ease-in;
+    border: 2px solid #cdc7f3;
+}
 .media-btn:hover, button:hover{
   text-decoration:none !important;
   background-color: #1f1f1f;
   color: #fff;
 }
-.media-btn:active{
+.media-btn:active, .jumbo-btn:active{
    transform: scale(0.9);
+}
+@media only screen and (max-width: 770px){
+  .jumbotron{
+    background-size: 30%, 100%;
+    margin: 0rem 3.9rem;
+  }
+}
+@media only screen and (max-width: 500px){
+  .jumbotron{
+    margin: 0rem 4rem;
+    background-size: 50%, 100%;
+  }
 }
 </style>

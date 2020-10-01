@@ -2,17 +2,17 @@
   <div id="app" >
     <router-view/>
     <!-- Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
-    <footer class="w-100 text-light row justify-content-space-between mx-auto align-items-center">
-      <div class="col pb-2"><span><img src="../src/assets/church-logo.png" class="img-responsive mr-2"> </span>The Redeemed Christian Church of God</div>
-      <div class="col">
-        <div class="row justify-content-space-between socials pt-md-2">
-          <p class="col-sm-1 text-center pr-md-4 mr-2">Connect With Us</p>
+    <footer class="py-4 text-light">
+      <div class=""><p class="row justify-content-center">The Redeemed Christian Church of God </p><p class="row justify-content-center" > Bethel Christian Center</p></div>
+      <div class="row justify-content-center ">
+          <router-link to="/" class="footer-link col-md-2 text-center">About Us</router-link><router-link to="/" class="footer-link text-center col-md-2">Messages</router-link><router-link to="/" class="footer-link col-md-2 text-center">Live</router-link><router-link to="/" class="footer-link col-md-2 text-center">Contact Us</router-link>
+        </div>
+        <div class="row justify-content-center socials my-4">
           <img src="../src/assets/facebook.png" class="col-sm-1 mt-md-2" style="max-width: 55px; height: 25px">
           <img class="col-sm-1 mt-md-2" src="../src/assets/instagram.png"  style="max-width: 55px; height: 25px">
           <img class="col-sm-1 mt-md-2" src="../src/assets/twitter.png"  style="max-width: 55px; height: 25px">
           <img class="col-sm-1 mt-md-2 " src="../src/assets/youtube.png"  style="max-width: 55px; height: 25px">
         </div>
-      </div>
     </footer>
   </div>
 </template>
@@ -30,16 +30,24 @@ body{
 }
 footer {
    background-image: linear-gradient(to right, #000033, #00001a, #000000);
-   font-size: 10px;
-   height: 9vh;
 }
 footer > div img{
    max-width: 1.5rem;
 }
+*:any-link{
+  text-decoration: none;
+}
 .socials img{
   cursor: pointer;
   -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.footer-link:hover{
+  text-decoration: none;
+  color: #fff;
+}
+.footer-link:active{
+  transform: scale(0.9);
 }
 .socials img:hover, .socials img:active{
     filter: grayscale(0);
