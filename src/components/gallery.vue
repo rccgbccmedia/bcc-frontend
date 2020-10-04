@@ -1,9 +1,9 @@
 <template>
-<div>
+<div id='theBody'>
      <navComponent></navComponent>
-     <div class="row justify-content-center mb-2 top-btns">
-        <button type="button" v-bind:class="{btn:true, active: pics}" @click="pics = true">Pictures <svg id="Capa_1" enable-background="new 0 0 512 512" height="30" :fill="picColor" viewBox="0 0 512 512" width="30" xmlns="http://www.w3.org/2000/svg"><g id="XMLID_1184_"><g id="XMLID_176_"><path id="XMLID_178_"  d="m318.006 211.841c-16.814 0-33.145 3.261-48.537 9.69-5.096 2.129-7.501 7.986-5.373 13.082 2.129 5.097 7.986 7.499 13.082 5.373 12.938-5.405 26.674-8.145 40.828-8.145 58.449 0 106 47.552 106 106s-47.551 106-106 106-106-47.552-106-106c0-14.132 2.732-27.85 8.121-40.77 2.126-5.098-.283-10.953-5.38-13.079-5.094-2.123-10.953.283-13.079 5.38-6.411 15.373-9.662 31.68-9.662 48.469 0 69.477 56.523 126 126 126s126-56.523 126-126-56.523-126-126-126z"/><path id="XMLID_711_" d="m318.006 419.841c45.215 0 82-36.785 82-82s-36.785-82-82-82-82 36.785-82 82 36.786 82 82 82zm0-144c34.187 0 62 27.814 62 62s-27.813 62-62 62-62-27.813-62-62 27.813-62 62-62z"/><path id="XMLID_714_" d="m461.284 163.841h-30.42l-34.915-59.087c-1.799-3.045-5.073-4.913-8.609-4.913h-138.667c-3.537 0-6.81 1.868-8.609 4.913l-34.915 59.087h-57.149v-12c0-19.851-16.149-36-36-36s-36 16.149-36 36v12h-25.284c-27.965 0-50.716 22.751-50.716 50.717v246.566c0 27.966 22.751 50.717 50.716 50.717h410.567c27.965 0 50.716-22.751 50.716-50.717v-246.566c.001-27.966-22.751-50.717-50.715-50.717zm-206.905-44h127.254l26 44h-179.254zm-158.379 32c0-8.822 7.178-16 16-16s16 7.178 16 16v12h-32zm396 309.283c0 16.938-13.779 30.717-30.716 30.717h-410.568c-16.937 0-30.716-13.78-30.716-30.717v-246.566c0-16.938 13.779-30.717 30.716-30.717h410.567c16.937 0 30.716 13.779 30.716 30.717v246.566z"/><path id="XMLID_717_" d="m318.006 318.341c10.753 0 19.5 8.748 19.5 19.5 0 5.523 4.477 10 10 10s10-4.477 10-10c0-21.78-17.72-39.5-39.5-39.5-5.523 0-10 4.478-10 10s4.477 10 10 10z"/><path id="XMLID_718_" d="m318.006 73.532c5.523 0 10-4.478 10-10v-53.373c0-5.522-4.477-10-10-10s-10 4.477-10 10v53.373c0 5.523 4.477 10 10 10z"/><path id="XMLID_719_" d="m365.591 73.532c2.559 0 5.119-.977 7.071-2.929l36.691-36.691c3.905-3.905 3.905-10.237-.001-14.143-3.905-3.904-10.237-3.904-14.142 0l-36.69 36.692c-3.905 3.905-3.905 10.237 0 14.143 1.953 1.952 4.512 2.928 7.071 2.928z"/><path id="XMLID_720_" d="m263.35 70.604c1.953 1.952 4.512 2.929 7.071 2.929s5.119-.977 7.071-2.929c3.905-3.905 3.906-10.237.001-14.143l-36.691-36.691c-3.905-3.903-10.237-3.904-14.142 0-3.905 3.905-3.906 10.237-.001 14.143z"/><path id="XMLID_730_" d="m138 245.841h-52c-5.523 0-10 4.478-10 10 0 5.523 4.477 10 10 10h52c5.523 0 10-4.477 10-10s-4.477-10-10-10z"/><path id="XMLID_731_" d="m235.96 265.84c2.63 0 5.21-1.07 7.07-2.93s2.93-4.431 2.93-7.07c0-2.63-1.07-5.21-2.93-7.07-1.86-1.859-4.44-2.93-7.07-2.93s-5.21 1.07-7.07 2.93c-1.87 1.86-2.93 4.441-2.93 7.07 0 2.63 1.06 5.21 2.93 7.07 1.86 1.86 4.43 2.93 7.07 2.93z"/></g></g></svg> </button>
-        <button type="button" v-bind:class="{btn:true, active: !pics}" @click="pics = false">Sermons
+     <div class="row justify-content-center top-btns">
+        <button type="button" v-bind:class="{btn:true, active: pics, col: true}" @click="pics = true">Pictures <svg id="Capa_1" enable-background="new 0 0 512 512" height="30" :fill="picColor" viewBox="0 0 512 512" width="30" xmlns="http://www.w3.org/2000/svg"><g id="XMLID_1184_"><g id="XMLID_176_"><path id="XMLID_178_"  d="m318.006 211.841c-16.814 0-33.145 3.261-48.537 9.69-5.096 2.129-7.501 7.986-5.373 13.082 2.129 5.097 7.986 7.499 13.082 5.373 12.938-5.405 26.674-8.145 40.828-8.145 58.449 0 106 47.552 106 106s-47.551 106-106 106-106-47.552-106-106c0-14.132 2.732-27.85 8.121-40.77 2.126-5.098-.283-10.953-5.38-13.079-5.094-2.123-10.953.283-13.079 5.38-6.411 15.373-9.662 31.68-9.662 48.469 0 69.477 56.523 126 126 126s126-56.523 126-126-56.523-126-126-126z"/><path id="XMLID_711_" d="m318.006 419.841c45.215 0 82-36.785 82-82s-36.785-82-82-82-82 36.785-82 82 36.786 82 82 82zm0-144c34.187 0 62 27.814 62 62s-27.813 62-62 62-62-27.813-62-62 27.813-62 62-62z"/><path id="XMLID_714_" d="m461.284 163.841h-30.42l-34.915-59.087c-1.799-3.045-5.073-4.913-8.609-4.913h-138.667c-3.537 0-6.81 1.868-8.609 4.913l-34.915 59.087h-57.149v-12c0-19.851-16.149-36-36-36s-36 16.149-36 36v12h-25.284c-27.965 0-50.716 22.751-50.716 50.717v246.566c0 27.966 22.751 50.717 50.716 50.717h410.567c27.965 0 50.716-22.751 50.716-50.717v-246.566c.001-27.966-22.751-50.717-50.715-50.717zm-206.905-44h127.254l26 44h-179.254zm-158.379 32c0-8.822 7.178-16 16-16s16 7.178 16 16v12h-32zm396 309.283c0 16.938-13.779 30.717-30.716 30.717h-410.568c-16.937 0-30.716-13.78-30.716-30.717v-246.566c0-16.938 13.779-30.717 30.716-30.717h410.567c16.937 0 30.716 13.779 30.716 30.717v246.566z"/><path id="XMLID_717_" d="m318.006 318.341c10.753 0 19.5 8.748 19.5 19.5 0 5.523 4.477 10 10 10s10-4.477 10-10c0-21.78-17.72-39.5-39.5-39.5-5.523 0-10 4.478-10 10s4.477 10 10 10z"/><path id="XMLID_718_" d="m318.006 73.532c5.523 0 10-4.478 10-10v-53.373c0-5.522-4.477-10-10-10s-10 4.477-10 10v53.373c0 5.523 4.477 10 10 10z"/><path id="XMLID_719_" d="m365.591 73.532c2.559 0 5.119-.977 7.071-2.929l36.691-36.691c3.905-3.905 3.905-10.237-.001-14.143-3.905-3.904-10.237-3.904-14.142 0l-36.69 36.692c-3.905 3.905-3.905 10.237 0 14.143 1.953 1.952 4.512 2.928 7.071 2.928z"/><path id="XMLID_720_" d="m263.35 70.604c1.953 1.952 4.512 2.929 7.071 2.929s5.119-.977 7.071-2.929c3.905-3.905 3.906-10.237.001-14.143l-36.691-36.691c-3.905-3.903-10.237-3.904-14.142 0-3.905 3.905-3.906 10.237-.001 14.143z"/><path id="XMLID_730_" d="m138 245.841h-52c-5.523 0-10 4.478-10 10 0 5.523 4.477 10 10 10h52c5.523 0 10-4.477 10-10s-4.477-10-10-10z"/><path id="XMLID_731_" d="m235.96 265.84c2.63 0 5.21-1.07 7.07-2.93s2.93-4.431 2.93-7.07c0-2.63-1.07-5.21-2.93-7.07-1.86-1.859-4.44-2.93-7.07-2.93s-5.21 1.07-7.07 2.93c-1.87 1.86-2.93 4.441-2.93 7.07 0 2.63 1.06 5.21 2.93 7.07 1.86 1.86 4.43 2.93 7.07 2.93z"/></g></g></svg> </button>
+        <button type="button" v-bind:class="{btn:true, active: !pics, col: true}" @click="pics = false">Sermons
           <span>
 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width='30px' :fill="vidColor" height='30px' viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <g>
@@ -81,16 +81,26 @@ L218.084,312.151z"/>
 </span>
 </button>
      </div>
-     <div v-if="pics">
-       <div class="row justify-content-center">
-         <div class="col-sm-12 col-md-8">Pictures</div>
-         <div class="col">Scroller</div>
+     <div v-if="pics" class="picSection">
+       <div class="row">
+         <div class="col-sm-12 col-md-8 imgShow border-right">
+           <div class="row justify-content-center">
+             <img src="../assets/pictures/prayerTwo.jpg" class="shadow rounded mt-4">
+           </div>
+         </div>
+         <div class="col imgScroller border-left">
+           <div class="row row-cols-sm-1 row-cols-lg-3  justify-content-center">
+            <div v-for="(image, index) in galleryImages" :key="index" class="justify-content-center p-sm-4">
+              <img src='../assets/pictures/prayerOne.jpg' :class="{selected: image.selected}">
+            </div>
+           </div>
+         </div>
        </div>
      </div>
-     <div class="videosTab container justify-content-center" v-else>
+     <div class="videosTab container-fluid justify-content-center pt-4" v-else>
        <div class="row row-cols-sm-1 row-cols-lg-2  justify-content-center">
                   <div v-for="n in 10" :key="n" class="justify-content-center p-sm-4">
-         <iframe class="col-sm-12" height="300px" src="https://www.youtube.com/embed/tgbNymZ7vqY">
+         <iframe class="col-sm-12" height="300px" src="https://www.youtube.com/embed/tgbNymZ7vqY" allow="fullscreen" allowfullscreen>
 </iframe>
 <p class="ml-4">This is the Message Title</p>
        </div>
@@ -106,7 +116,42 @@ export default {
   components: {navComponent},
   data () {
     return {
-      pics: true
+      pics: true,
+      pic: '../../apple-touch-icon.png',
+      galleryImages: [
+        {
+          source: '../assets/pictures/prayerOne.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/prayerTwo.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/randomEIght.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/randomFive.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/threeLadies.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/randomFour.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/randomOne.jpg',
+          selected: false
+        },
+        {
+          src: '../assets/pictures/randomSeven.jpg',
+          selected: false
+        }
+      ]
     }
   },
   computed: {
@@ -138,10 +183,36 @@ iframe{
   border:none;
 }
 .top-btns{
-  background-color: aliceblue;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
+}
+.picSection{
+  background:  linear-gradient(to right, #efeff1, #bcbcf5, #c3c3e6, #b5b5f0fd);
+}
+.top-btns button.active, .videosTab, .picSection{
+     background:  linear-gradient(to right, #efeff1, #bcbcf5, #c3c3e6, #b5b5f0fd);
+}
+.imgShow{
+  justify-items: flex-end;
+}
+.imgScroller{
+  max-height: 80vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  scroll-margin-left: 20px;
+}
+.imgShow img{
+  max-width: 47pc;
+}
+.imgScroller img{
+  max-width: 135px;
+  transition: all 0.5s ease-in;
+  border-radius: 6px;
+}
+.imgScroller img:hover{
+  transform: scale(1.2);
 }
 .active{
   color: #1010b8;
