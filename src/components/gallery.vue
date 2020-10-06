@@ -85,13 +85,13 @@ L218.084,312.151z"/>
        <div class="row">
          <div class="col-sm-12 col-md-8 imgShow border-right">
            <div class="row justify-content-center">
-             <img src="../assets/pictures/prayerTwo.jpg" class="shadow rounded mt-4">
+             <img :src='`static/img/${selectedImageSrc}.jpg`' class="shadow rounded mt-4 mb-4" data-aos="slide-left"  data-aos-duration="1500">
            </div>
          </div>
          <div class="col imgScroller border-left">
-           <div class="row row-cols-sm-1 row-cols-lg-3  justify-content-center">
-            <div v-for="(image, index) in galleryImages" :key="index" class="justify-content-center p-sm-4">
-              <img src='../assets/pictures/prayerOne.jpg' :class="{selected: image.selected}">
+           <div class="row row-cols-sm-1 row-cols-lg-3">
+            <div v-for="(image, index) in galleryImages" :key="index" class=" p-sm-4">
+              <img :src='`static/img/${image.name}.jpg`' :class="{selected: image.selected}" @click="imageClicked(image)">
             </div>
            </div>
          </div>
@@ -106,6 +106,7 @@ L218.084,312.151z"/>
        </div>
        </div>
      </div>
+     <!-- Mobile Section -->
 </div>
 </template>
 
@@ -117,41 +118,51 @@ export default {
   data () {
     return {
       pics: true,
-      pic: '../../apple-touch-icon.png',
+      pic: 'prayerOne',
+      selectedImageSrc: 'threeLadies',
       galleryImages: [
         {
-          source: '../assets/pictures/prayerOne.jpg',
+          name: 'prayerOne',
           selected: false
         },
         {
-          src: '../assets/pictures/prayerTwo.jpg',
+          name: 'prayerTwo',
           selected: false
         },
         {
-          src: '../assets/pictures/randomEIght.jpg',
+          name: 'randomEIght',
           selected: false
         },
         {
-          src: '../assets/pictures/randomFive.jpg',
+          name: 'randomFive',
           selected: false
         },
         {
-          src: '../assets/pictures/threeLadies.jpg',
+          name: 'threeLadies',
+          selected: true
+        },
+        {
+          name: 'randomFour',
           selected: false
         },
         {
-          src: '../assets/pictures/randomFour.jpg',
+          name: 'randomOne',
           selected: false
         },
         {
-          src: '../assets/pictures/randomOne.jpg',
-          selected: false
-        },
-        {
-          src: '../assets/pictures/randomSeven.jpg',
+          name: 'randomSeven',
           selected: false
         }
       ]
+    }
+  },
+  methods: {
+    imageClicked (image) {
+      this.selectedImageSrc = image.name
+      this.galleryImages.map(el => {
+        el.selected = false
+      })
+      image.selected = true
     }
   },
   computed: {
@@ -164,6 +175,9 @@ export default {
       }
       return color
     },
+    // selectedImageSrc: function () {
+    //   return `static/img/prayerTwo.jpg`
+    // },
     vidColor: function () {
       let color = '#000'
       if (this.pics) {
@@ -179,6 +193,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+#theBody{
+  overflow-x: hidden;
+}
 iframe{
   border:none;
 }
@@ -201,7 +218,9 @@ iframe{
   overflow-y: scroll;
   scroll-behavior: smooth;
   overflow-x: hidden;
-  scroll-margin-left: 20px;
+}
+img.selected{
+  border: 4px solid #1010b8;
 }
 .imgShow img{
   max-width: 47pc;
@@ -216,5 +235,29 @@ iframe{
 }
 .active{
   color: #1010b8;
+}
+@media only screen and (max-width: 810px){
+  div.imgShow{
+    border: 0 !important;
+    margin-left: 9rem;
+  }
+ div.imgScroller{
+    position: absolute;
+    opacity: 0.6;
+    scroll-snap-type: proximity;
+    right: 0 !important;
+    border: 0 !important;
+  }
+  div.imgScroller:active{
+    opacity: 1;
+  }
+}
+@media only screen and (max-width: 500px){
+  div.imgScroller img{
+    max-width: 55px;
+  }
+  div.imgScroller {
+    margin-top: 10px;
+  }
 }
 </style>
