@@ -4,7 +4,10 @@
   <a class="navbar-brand" href="#">
        <img src="../assets/church-logo.png">
   </a>
-      <p class="d-xs-none d-lg-block pt-3">THE REDEEMED <br> CHRISTIAN CHURCH OF GOD</p>
+  <div class="row pl-2">
+      <p class="d-xs-none d-lg-block w-100 pt-3 heading">THE REDEEMED CHRISTIAN CHURCH OF GOD</p> <br>
+      <p class="d-xs-none d-lg-block w-100 support-text">Bethel Christian Center</p>
+  </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
     <a class="more-mobile"><img @click="popover = true" src="../assets/more.png"></a>
     <!-- <a href="#menu">Click me</a> -->
@@ -82,19 +85,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-:root {
-  --main-bg-color: coral;
-  --menu-bg: #DE4152;
---menu-color: #ffffff;
---menu-font-size: 2.5rem;
---menu-zindex: 1100;
---hamburger-color: #fff;
---hamburger-width: 50px;
---hamburger-height: 50px;
---hamburger-zindex: $menu-zindex + 10;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Imprima&display=swap');
 nav{
      background-image: linear-gradient(to right, #000033, #00001a, #000000);
+}
+.heading{
+ font-family: 'Bree Serif', serif;
+}
+.support-text{
+  opacity: 0.8;
+  font-size: 20px;
+  font-family: 'Imprima', sans-serif;
 }
 .more-mobile >img, button.close > img{
      max-width: 1.1rem;

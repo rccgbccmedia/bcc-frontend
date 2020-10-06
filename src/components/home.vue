@@ -100,7 +100,7 @@ export default {
 
 <style scoped>
 .carousel-item{
-  height: 20rem;
+  height: 40rem;
 }
 .carousel-item h4{
   font-size: 40px;
