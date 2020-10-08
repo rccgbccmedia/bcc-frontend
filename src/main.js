@@ -32,7 +32,7 @@ AOS.init({
 })
 
 Vue.config.productionTip = false
-export const eventBus = new Vue()
+export const EventBus = new Vue()
 
 /* eslint-disable no-new */
 new Vue({

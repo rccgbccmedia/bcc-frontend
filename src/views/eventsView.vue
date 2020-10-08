@@ -49,22 +49,24 @@
 
 <script>
 import userModal from '../views/userModal'
-import { eventBus } from '../main'
+import { EventBus } from '../main'
+import authentication from '../assets/mixins/authenticateUser'
+
 export default {
   name: 'EventsView',
+  mixins: [authentication],
   components: {
     userModal
   },
   data () {
     return {
-      signedIn: true
+      signedIn: false
     }
   },
   methods: {
     eventRegister (eventData) {
-      console.log('sending')
-      if (!this.signedIn) {
-        eventBus.$emit('openModal', eventData)
+      if (this.signedIn === false) {
+        EventBus.$emit('openModal', eventData)
       } else {
         this.registerUser(eventData)
       }
