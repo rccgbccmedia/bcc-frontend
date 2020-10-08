@@ -2,21 +2,24 @@
 <div>
      <navComponent id="theNav"></navComponent>
      <!-- Carousel starts -->
-     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+     <div id="carouselExampleSlidesOnly" class="carousel slide carouselFade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active text-light bg-dark">
-        <div class="page ml-4 pl-4" data-aos="slide-right">
-           <!-- <h4 class="pt-md-4 mt-md-4" style="color:#1010b8">Join a family of <span class="text-light">CHRIST</span> </h4> -->
+        <div class="page mt-md-4 pt-md-4 pl-4 ml-4">
+           <h1 class=" text-left">WELCOME</h1>
+           <h2 class=" text-left">TO A <span>CHRIST-CENTERED</span> FAMILY</h2>
+        </div>
+    </div>
+     <div class="carousel-item text-light bg-dark">
+        <div class="page mt-md-4 pt-md-4 pl-4 ml-4 text-light">
+          <h1 class=" text-left"> <span>JOIN US</span></h1>
+           <h2 class=" text-left"> FOR ANY OF OUR SERVICES</h2>
         </div>
     </div>
     <div class="carousel-item text-light bg-dark">
-        <div class="page ml-4 pl-4" data-aos="slide-right">
-           <!-- <h4 class="pt-md-4 mt-md-4">Experience the amazing power of <span class="special">GOD</span></h4> -->
-        </div>
-    </div>
-    <div class="carousel-item text-light bg-dark">
-        <div class="page ml-4 pl-4" data-aos="slide-right">
-           <!-- <h4 class="pt-md-4 mt-md-4">An atmosphere of  <br><span class="special">PRAISE</span> and <span class="special">WORSHIP</span></h4> -->
+        <div class="page mt-md-4 pt-md-4 pl-4 ml-4">
+           <h1 class=" text-left">YOU CAN <span>JOIN US </span></h1>
+           <h2 class=" text-left">IN OUR LIVE SERVICES</h2>
         </div>
     </div>
   </div>
@@ -100,7 +103,7 @@ export default {
 
 <style scoped>
 .carousel-item{
-  height: 40rem;
+  height: 30rem;
 }
 .carousel-item h4{
   font-size: 40px;
@@ -128,7 +131,20 @@ hr{
   background-repeat: no-repeat;
 }
 .carousel-item .page{
+  font-family: 'Imprima', sans-serif;
   margin-top: 10%;
+  padding-left: 30px !important;
+   /* color: #49499c; */
+}
+.carousel-item .page h1{
+    font-size: 10ch ;
+}
+.carousel-item .page h2{
+    font-size: 5ch;
+}
+.carousel-item .page span {
+  color: rgb(216, 42, 42);
+  border-bottom: 10px solid rgb(216, 42, 42);
 }
 span.special{
   font-weight: bolder;
