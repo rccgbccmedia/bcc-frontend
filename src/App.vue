@@ -2,7 +2,7 @@
   <div id="app" >
     <router-view/>
     <!-- Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
-    <button class="scroll-button" title="Scroll to top" v-show="scroller">Up</button>
+    <button class="scroll-button mr-lg-0 mr-sm-3 shadow" title="Scroll to top" v-show="scroller" @click="topFunction"><img src="../src/assets/up-arrow.png"/></button>
     <footer class="py-4 text-light">
       <div class=""><p class="row justify-content-center">The Redeemed Christian Church of God </p><p class="row justify-content-center" > Bethel Christian Center</p></div>
       <div class="row justify-content-center ">
@@ -21,26 +21,30 @@
 <script>
 export default {
   name: 'App',
-  mounted: {
-
+  data () {
+    return {
+      scroller: false
+    }
+  },
+  mounted () {
+    document.addEventListener('scroll', (e) => {
+      this.scrollFunction()
+    })
   },
   methods: {
-
+    scrollFunction () {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        this.scroller = true
+      } else {
+        this.scroller = false
+      }
+    },
+    topFunction () {
+      document.body.scrollTop = 0 // For Safari
+      document.documentElement.scrollTop = 0 // For Chrome, Firefox, IE and Opera
+    }
   },
   computed: {
-    scroller () {
-      let one = document.body.scrollTop > 20
-      let two = document.documentElement.scrollTop > 20
-      console.log(one)
-      console.log(two)
-      let value = false
-      if (one || two) {
-        value = true
-      } else {
-        value = false
-      }
-      return value
-    }
   }
 }
 </script>
@@ -82,7 +86,7 @@ button.scroll-button{
   position:fixed;
   /* display: none; */
   bottom: 20px;
-  padding: 15px;
+  padding: 10px;
   right: 30px;
 }
 button.scroll-button:hover{
