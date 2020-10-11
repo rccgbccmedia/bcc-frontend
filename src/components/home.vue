@@ -1,6 +1,5 @@
 <template>
 <div>
-     <navComponent id="theNav"></navComponent>
      <!-- Carousel starts -->
      <div id="carouselExampleSlidesOnly" class="carousel slide carouselFade" data-ride="carousel">
   <div class="carousel-inner">
@@ -86,11 +85,11 @@
 </template>
 
 <script>
-import navComponent from '../views/theNav'
+
 import events from '../views/eventsView'
 export default {
   name: 'Home',
-  components: {navComponent, events},
+  components: {events},
   data () {
     return {
 

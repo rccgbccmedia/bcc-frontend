@@ -1,5 +1,6 @@
 <template>
   <div id="app" >
+    <navComponent id="theNav"></navComponent>
     <router-view/>
     <!-- Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
     <button class="scroll-button mr-lg-0 mr-sm-3 shadow" title="Scroll to top" v-show="scroller" @click="topFunction"><img src="../src/assets/up-arrow.png"/></button>
@@ -19,8 +20,10 @@
 </template>
 
 <script>
+import navComponent from '../src/views/theNav'
 export default {
   name: 'App',
+  components: {navComponent},
   data () {
     return {
       scroller: false

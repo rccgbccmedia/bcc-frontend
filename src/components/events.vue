@@ -1,6 +1,5 @@
 <template>
 <div>
-     <navComponent></navComponent>
      <div class="jumbotron mb-4" data-aos="zoom-in"
      data-aos-easing="ease-out-cubic"
      data-aos-duration="1500">
@@ -16,12 +15,11 @@
 </template>
 
 <script>
-import navComponent from '../views/theNav'
 import events from '../views/eventsView'
 
 export default {
   name: 'Events',
-  components: {navComponent, events},
+  components: {events},
   data () {
     return {
     }

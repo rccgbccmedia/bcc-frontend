@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/components/home'
 import Gallery from '@/components/gallery'
 import Events from '@/components/events'
+import About from '@/components/about'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/events',
       name: 'Events',
       component: Events
+    },
+    {
+      path: '/about',
+      name: 'About',
+      component: About
     }
   ]
 })
