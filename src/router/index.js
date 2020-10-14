@@ -4,13 +4,15 @@ import Home from '@/components/home'
 import Gallery from '@/components/gallery'
 import Events from '@/components/events'
 import About from '@/components/about'
+import Live from '@/components/live'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/home',
       name: 'Home',
       component: Home
     },
@@ -28,6 +30,11 @@ export default new Router({
       path: '/about',
       name: 'About',
       component: About
+    },
+    {
+      path: '/live',
+      name: 'Live',
+      component: Live
     }
   ]
 })

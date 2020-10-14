@@ -7,7 +7,7 @@
     <footer class="py-4 text-light">
       <div class=""><p class="row justify-content-center">The Redeemed Christian Church of God </p><p class="row justify-content-center" > Bethel Christian Center</p></div>
       <div class="row justify-content-center ">
-          <router-link to="/" class="footer-link col-md-2 text-center">About Us</router-link><router-link to="/" class="footer-link text-center col-md-2">Messages</router-link><router-link to="/" class="footer-link col-md-2 text-center">Live</router-link><router-link to="/" class="footer-link col-md-2 text-center">Contact Us</router-link>
+          <router-link to="/about" class="footer-link col-md-2 text-center">About Us</router-link><router-link to="/media" class="footer-link text-center col-md-2">Messages</router-link><router-link to="/live" class="footer-link col-md-2 text-center">Live</router-link>
         </div>
         <div class="row justify-content-center socials my-4">
           <img src="../src/assets/facebook.png" class="col-sm-1 mt-md-2" style="max-width: 55px; height: 25px">
@@ -58,6 +58,9 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Imprima&display=swap');
 body{
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+iframe{
+  border:none;
 }
 footer {
    background-image: linear-gradient(to right, #000033, #00001a, #000000);

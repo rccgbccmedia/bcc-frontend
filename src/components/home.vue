@@ -1,7 +1,7 @@
 <template>
 <div>
      <!-- Carousel starts -->
-     <div id="carouselExampleSlidesOnly" class="carousel slide carouselFade" data-ride="carousel">
+     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active text-light bg-dark">
         <div class="page mt-md-4 pt-md-4 pl-4 ml-4">
@@ -42,7 +42,7 @@
     <h5 class="mt-2 text-center mb-4  py-2"><span><img src="../assets/church-icon.png" class="my-2"> </span>  <br>OUR CHURCH </h5>
     <p class="px-lg-4">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
     <p class="mb-0 px-lg-4">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-    <router-link to="About"  class="row justify-content-end m-4"><button class="media-btn">About Us</button></router-link>
+    <router-link to="/about"  class="row justify-content-end m-4"><button class="media-btn">About Us</button></router-link>
   </div>
 </div>
 <hr >
