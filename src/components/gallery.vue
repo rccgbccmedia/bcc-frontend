@@ -194,9 +194,6 @@ export default {
 #theBody{
   overflow-x: hidden;
 }
-iframe{
-  border:none;
-}
 .top-btns{
   position: -webkit-sticky;
   position: sticky;

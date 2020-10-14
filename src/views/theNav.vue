@@ -15,16 +15,19 @@
   <div class="collapse navbar-collapse justify-content-end text-light">
     <ul class="navbar-nav">
       <li class="nav-item"  data-aos="fade-right">
-          <router-link to="/" class="nav-link">Home</router-link>
-      </li>
-      <li class="nav-item"  data-aos="fade-right">
-          <router-link to="About"  class="nav-link">About</router-link>
+          <router-link to="/home" class="nav-link px-4">Home</router-link>
       </li>
       <li class="nav-item" data-aos="fade-right">
-           <router-link to="/media"  class="nav-link">Media</router-link>
+           <router-link to="/media"  class="nav-link px-4">Media</router-link>
       </li>
       <li class="nav-item" data-aos="fade-right">
-           <router-link to="/events"  class="nav-link">Events</router-link>
+           <router-link to="/events"  class="nav-link px-4">Events</router-link>
+      </li>
+      <li class="nav-item" data-aos="fade-right">
+           <router-link to="/live"  class="nav-link px-4">Live</router-link>
+      </li>
+       <li class="nav-item"  data-aos="fade-right">
+          <router-link to="/about"  class="nav-link px-4">About</router-link>
       </li>
     </ul>
   </div>
@@ -38,16 +41,19 @@
   <div class="inner-content border text-light justify-content-center row align-items-center">
     <ul class="navbar-nav">
       <li class="nav-item py-2">
-          <router-link to="/" class="nav-link">Home</router-link>
-      </li>
-      <li class="nav-item py-2">
-          <router-link to="About"  class="nav-link">About</router-link>
+          <router-link to="/home" class="nav-link">Home</router-link>
       </li>
       <li class="nav-item py-2">
            <router-link to="/media"  class="nav-link">Media</router-link>
       </li>
       <li class="nav-item py-2">
            <router-link to="/events"  class="nav-link">Events</router-link>
+      </li>
+      <li class="nav-item py-2">
+           <router-link to="/live"  class="nav-link">Live</router-link>
+      </li>
+      <li class="nav-item py-2">
+          <router-link to="/about"  class="nav-link">About</router-link>
       </li>
     </ul>
   </div>
