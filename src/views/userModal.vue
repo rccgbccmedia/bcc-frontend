@@ -2,8 +2,14 @@
 <div>
      <div id="myModal" class="modal">
           <!-- Modal content -->
-          <div class="modal-content">
+          <div class="modal-content shadow">
           <span class="close text-right" @click="closeForm" title="Close Form">&times;</span>
+          <div class="alert alert-primary text-dark" role="alert" v-show="registrationSuccessful && registering" id="registrationSuccessful">
+            <h4 class="alert-heading top-text">Welcome on board!</h4>
+            <p class="top-text">Your registration was successful</p>
+            <hr>
+            <p class="mb-0">Please <span @click="registering = !registering" class="text-link">Sign In</span></p>
+          </div>
           <div id='registrationForm' v-if="registering" data-aos="flip-right"   data-aos-duration="1500">
         <form class="text-center">
           <section class="form-head text-dark">
@@ -24,21 +30,24 @@
         <div class="form-row justify-content-center">
           <div class="form-group col-md-5">
             <label for="passwordOne">Password</label>
-            <input type="password" class="form-control" id="passwordOne" placeholder="******" v-model="registerDetails.passwordOne" required>
+            <input type="password" class="form-control" id="passwordOne" placeholder="******" v-model="registerDetails.passwordOne" required @keyup="passwordCheck(registerDetails.passwordOne, registerDetails.passwordConfirm)">
           </div>
           <div class="form-group col-md-5">
             <label for="passwordTwo">Confirm Password</label>
-            <input type="password" class="form-control" id="passwordTwo" required placeholder="******" v-model="registerDetails.passwordConfirm">
+            <input type="password" class="form-control" id="passwordTwo" required placeholder="******" v-model="registerDetails.passwordConfirm" @keyup="passwordCheck(registerDetails.passwordOne, registerDetails.passwordConfirm)">
+            <small class="text-danger"  v-show="passwordMatch">Both passwords need to match</small>
           </div>
         </div>
         <div class="form-row  justify-content-center">
           <div class="form-group col-md-5">
             <label for="phoneNumber">Phone Number</label>
             <input type="number" class="form-control" id="phoneNumber" required placeholder="+234 012 345 6789" v-model="registerDetails.phoneNumber">
+            <small class="text-light">Please provide dailing code</small>
           </div>
           <div class="form-group col-md-5">
             <label for="userMail">Email</label>
-            <input type="email" class="form-control" id="userMail" placeholder="heyUser@mail.com" v-model="registerDetails.email" required>
+            <input type="email" :class="{'form-control': true,'border-danger': mailCheck}" id="userMail" placeholder="heyUser@mail.com" v-model="registerDetails.email" required @keyup="emailCheck(registerDetails.email)">
+            <small class="text-danger" v-show="mailCheck">Please provide a valid email address</small>
           </div>
         </div>
         <div class="form-row justify-content-center">
@@ -47,7 +56,9 @@
           <textarea class="form-control" id="inputAddress" placeholder="1234 Main St" v-model="registerDetails.address"></textarea>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" @click.prevent="registerUser">Register</button>
+        <p class="alert alert-danger" v-show="allFields">All fields are required</p>
+        <button type="submit" class="btn btn-primary" @click.prevent="confirmDetails" v-if="!loading">Register</button>
+          <img src="../assets/loading.gif" v-else>
         <section class="pt-4 form-footer">
           <h5>Already a member? <br> Please <span @click="registering = !registering" class="text-link">Sign In</span></h5>
         </section>
@@ -63,7 +74,8 @@
               <div class="form-row justify-content-center">
               <div class="form-group col-md-8 col-lg-6">
                 <label for="loginEmail">Email address</label>
-                <input type="email" class="form-control" id="loginEmail" aria-describedby="emailHelp" v-model="loginDetails.mail">
+                <input type="email" :class="{'form-control': true, 'border-danger': mailError}" id="loginEmail" aria-describedby="emailHelp"  @keyup="emailCheck(loginDetails.mail, 'login')" v-model="loginDetails.mail">
+                <small v-show="mailError" class="text-danger">Please provide a valid mail</small>
               </div>
               </div>
               <div class="form-row justify-content-center">
@@ -72,9 +84,12 @@
                 <input type="password" class="form-control" id="loginPassword" v-model="loginDetails.password">
               </div>
               </div>
-              <button type="submit" class="btn btn-primary" @click.prevent="loginUser">Login</button>
+              <p class="alert alert-danger" v-show="incompleteLoginFields">Both fields are required please</p>
+              <button type="submit" class="btn btn-primary" @click.prevent="confirmLogin" v-if="!loginLoading">Login</button>
+               <img src="../assets/loading.gif" v-else>
               <section class="pt-4 form-footer">
-                <h5>Don't have an account? <br> Please <span @click="registering = !registering" class="text-link">Register here</span></h5>
+                <h5 >Don't have an account? <br> Please <span @click="registering = !registering" class="text-link">Register here</span></h5>
+                <h6 class="text-link ">Forgot Password?</h6>
               </section>
             </form>
           </div>
@@ -84,8 +99,11 @@
 </template>
 
 <script>
+
 import { EventBus } from '../main.js'
 import authentication from '../assets/mixins/authenticateUser'
+import axios from 'axios'
+
 export default {
   name: 'Modal',
   components: {},
@@ -98,6 +116,12 @@ export default {
   data () {
     return {
       registering: true,
+      registrationSuccessful: false,
+      mailError: false,
+      loading: false,
+      allFields: false,
+      mailCheck: false,
+      passwordMatch: false,
       registerDetails: {
         firstName: '',
         lastName: '',
@@ -111,13 +135,131 @@ export default {
       loginDetails: {
         mail: '',
         password: ''
-      }
+      },
+      incompleteLoginFields: false,
+      loginSuccessful: false,
+      loginLoading: false
     }
+  },
+  watch: {
   },
   methods: {
     closeForm () {
       let modal = document.querySelector('#myModal')
       modal.style.display = 'none'
+    },
+    confirmLogin () {
+      if (this.loginDetails.mail === '' || this.loginDetails.password === '') {
+        this.incompleteLoginFields = true
+      } else {
+        this.incompleteLoginFields = false
+        if (!this.mailError) {
+          this.loginUser()
+        }
+      }
+    },
+    loginUser () {
+      this.loginLoading = true
+      axios.post('https://bcc-backend.herokuapp.com/login/', {
+        'email': this.loginDetails.mail,
+        'password': this.loginDetails.password
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          this.loginLoading = false
+          this.loginSuccessful = true
+          setTimeout(() => {
+            this.loginSuccessful = false
+          // this.closeForm()
+          // Or immediately redirect to the event register form
+          }, 3500)
+        }
+      }).catch((err) => {
+        this.loginLoading = false
+        console.log(err)
+      }).finally((val) => {
+        this.loginDetails.mail = ''
+        this.loginDetails.password = ''
+      })
+    },
+    emailCheck (mail, loginMailError) {
+      // eslint-disable-next-line no-useless-escape
+      let regex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
+      if (regex.test(mail)) {
+        if (loginMailError) {
+          this.mailError = false
+        } else {
+          this.mailCheck = false
+        }
+      } else {
+        if (loginMailError) {
+          this.mailError = true
+        } else {
+          this.mailCheck = true
+        }
+      }
+    },
+    passwordCheck (passwordOne, passwordTwo) {
+      if (passwordOne !== passwordTwo) {
+        this.passwordMatch = true
+      } else {
+        this.passwordMatch = false
+        this.registerDetails.password = this.registerDetails.passwordOne
+      }
+    },
+    confirmDetails () {
+      // console.log(this.registerDetails)
+      if (this.registerDetails.email === '' || this.registerDetails.address === '' || this.registerDetails.password === '' || this.registerDetails.phoneNumber === '' || this.registerDetails.firstName === '' || this.registerDetails.lastName === '') {
+        this.allFields = true
+      } else {
+        this.allFields = false
+        this.passwordCheck(this.registerDetails.passwordOne, this.registerDetails.passwordConfirm)
+        this.emailCheck(this.registerDetails.email)
+        if (!this.passwordMatch) {
+          console.log("We're good to go")
+          this.registerUser()
+        }
+      }
+    },
+    registerUser () {
+      this.loading = true
+      axios.post('https://bcc-backend.herokuapp.com/register/', {
+        'email': this.registerDetails.email,
+        'address': this.registerDetails.address,
+        'password': this.registerDetails.password,
+        'first_name': this.registerDetails.firstName,
+        'last_name': this.registerDetails.lastName,
+        'phone': this.registerDetails.phoneNumber
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        console.log(res)
+        this.loading = false
+        this.registrationSuccessful = true
+        document.setTimeout(() => {
+          this.registrationSuccessful = false
+          this.registering = false
+        }, 3500)
+        console.log(res)
+      }).catch((err) => {
+        this.loading = false
+        console.log(err)
+      }).finally((val) => {
+        this.registerDetails.email = ''
+        this.registerDetails.address = ''
+        this.registerDetails.password = ''
+        this.registerDetails.firstName = ''
+        this.registerDetails.lastName = ''
+        this.registerDetails.phoneNumber = ''
+        this.registerDetails.passwordOne = ''
+        this.registerDetails.passwordConfirm = ''
+      })
     }
   },
   created () {
@@ -135,6 +277,15 @@ export default {
         modal.style.display = 'none'
       }
     }
+  },
+  computed: {
+    // allFilled: function () {
+    //   // if (this.registerDetails.email === '' || this.registerDetails.address === '' || this.registerDetails.passwordOne === '' || this.registerDetails.phoneNumber === '' || this.registerDetails.firstName === '' || this.registerDetails.lastName === '' || this.registerDetails.passwordConfirm === '') {
+    //   //   return true
+    //   // } else {
+    //   //   return false
+    //   // }
+    // }
   }
 }
 </script>
@@ -173,7 +324,26 @@ section h3 {
   border: 1px solid #888;
   width: 60%;
 }
-
+.form-control{
+  font-size: 0.9rem;
+}
+#registrationSuccessful{
+  z-index: 5;
+  background-image: url('../assets/animation_500.gif');
+  background-size: 60px;
+  background-position: top right;
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+}
+#registrationSuccessful img{
+  z-index: 2;
+  position: absolute;
+  max-width: 60px;
+  margin-left: 50vw;
+}
+.top-text{
+  z-index: 3;
+}
 /* The Close Button */
 .close {
   color: #aaaaaa;
