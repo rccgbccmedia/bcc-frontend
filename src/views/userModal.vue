@@ -10,6 +10,12 @@
             <hr>
             <p class="mb-0">Please <span @click="registering = !registering" class="text-link">Sign In</span></p>
           </div>
+           <div class="alert alert-primary text-dark" role="alert" v-show="loginSuccessful && !registering" id="loginSuccessful">
+            <h4 class="alert-heading top-text">Glad to have you back!</h4>
+            <p class="top-text">Your log in was successful</p>
+            <!--<hr>
+             <p class="mb-0">Please <span @click="registering = !registering" class="text-link">Sign In</span></p> -->
+          </div>
           <div id='registrationForm' v-if="registering" data-aos="flip-right"   data-aos-duration="1500">
         <form class="text-center">
           <section class="form-head text-dark">
@@ -66,6 +72,7 @@
           </div>
           <div id="loginForm" v-else data-aos="flip-left"   data-aos-duration="1500">
             <form class="text-center">
+              <div>
               <section class="form-head text-dark">
                 <h3 class="lead pb-4">Hey there! <br>
                   Welcome back!
@@ -78,19 +85,20 @@
                 <small v-show="mailError" class="text-danger">Please provide a valid mail</small>
               </div>
               </div>
-              <div class="form-row justify-content-center">
+              <div class="form-row justify-content-center" v-if="!forgotForm">
               <div class="form-group col-md-7 col-lg-5">
                 <label for="loginPassword">Password</label>
                 <input type="password" class="form-control" id="loginPassword" v-model="loginDetails.password">
               </div>
               </div>
               <p class="alert alert-danger" v-show="incompleteLoginFields">Both fields are required please</p>
-              <button type="submit" class="btn btn-primary" @click.prevent="confirmLogin" v-if="!loginLoading">Login</button>
+              <button type="submit" class="btn btn-primary" @click.prevent="confirmLogin" v-if="!loginLoading"><span v-if="forgotForm">Reset Password</span><span v-else>Login</span></button>
                <img src="../assets/loading.gif" v-else>
               <section class="pt-4 form-footer">
                 <h5 >Don't have an account? <br> Please <span @click="registering = !registering" class="text-link">Register here</span></h5>
-                <h6 class="text-link ">Forgot Password?</h6>
+                <h6 class="text-link" @click="forgotForm = !forgotForm"><span v-if="forgotForm">Back to Login</span><span v-else>Forgot Password?</span></h6>
               </section>
+              </div>
             </form>
           </div>
           </div>
@@ -116,6 +124,7 @@ export default {
   data () {
     return {
       registering: true,
+      forgotForm: false,
       registrationSuccessful: false,
       mailError: false,
       loading: false,
@@ -149,14 +158,58 @@ export default {
       modal.style.display = 'none'
     },
     confirmLogin () {
-      if (this.loginDetails.mail === '' || this.loginDetails.password === '') {
-        this.incompleteLoginFields = true
+      if (this.forgotForm) {
+        if (this.loginDetails.mail !== '') {
+          this.passwordReset()
+        }
       } else {
-        this.incompleteLoginFields = false
-        if (!this.mailError) {
-          this.loginUser()
+        if (this.loginDetails.mail === '' || this.loginDetails.password === '') {
+          this.incompleteLoginFields = true
+        } else {
+          this.incompleteLoginFields = false
+          if (!this.mailError) {
+            this.loginUser()
+          }
         }
       }
+    },
+    async storeInLocalStorage (userObject, accessToken, refreshToken) {
+      localStorage.setItem('user', JSON.stringify(userObject))
+      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('refreshToken', refreshToken)
+      let arrayStuff = []
+      arrayStuff[0] = await localStorage.getItem('user')
+      arrayStuff[1] = await localStorage.getItem('accessToken')
+      arrayStuff[2] = await localStorage.getItem('refreshToken')
+      console.table(arrayStuff)
+    },
+    passwordReset () {
+      // console.log('Reseting Password')
+      this.loginLoading = true
+      axios.post('https://bcc-backend.herokuapp.com/password/reset/', {
+        'email': this.loginDetails.mail
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          this.loginLoading = false
+          this.resetText = true
+        //  setTimeout(() => {
+          //  this.loginSuccessful = false
+          // this.closeForm()
+          // Or immediately redirect to the event register form
+        //  }, 3500)
+        }
+      }).catch((err) => {
+        this.loginLoading = false
+        console.log(err)
+      }).finally((val) => {
+        this.loginDetails.mail = ''
+        this.loginDetails.password = ''
+      })
     },
     loginUser () {
       this.loginLoading = true
@@ -172,9 +225,10 @@ export default {
         if (res.status === 200) {
           this.loginLoading = false
           this.loginSuccessful = true
+          this.storeInLocalStorage(res.data.user, res.data.access_token, res.data.refresh_token)
           setTimeout(() => {
             this.loginSuccessful = false
-          // this.closeForm()
+            this.closeForm()
           // Or immediately redirect to the event register form
           }, 3500)
         }
@@ -265,6 +319,9 @@ export default {
   created () {
   },
   mounted () {
+   //  let val =
+     localStorage.removeItem('user')
+   //  console.log(JSON.parse(val))
     let modal = document.getElementById('myModal')
     // Listening for when the register modal is called
     EventBus.$on('openModal', eventData => {
@@ -327,6 +384,14 @@ section h3 {
 .form-control{
   font-size: 0.9rem;
 }
+#loginSuccessful{
+  z-index: 5;
+  background-image: url('../assets/hey1.gif');
+  background-size: 90px;
+  background-position: top right;
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+}
 #registrationSuccessful{
   z-index: 5;
   background-image: url('../assets/animation_500.gif');
@@ -335,7 +400,7 @@ section h3 {
   background-origin: padding-box;
   background-repeat: no-repeat;
 }
-#registrationSuccessful img{
+#registrationSuccessful img, #loginSuccessful img{
   z-index: 2;
   position: absolute;
   max-width: 60px;
