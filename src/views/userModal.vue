@@ -319,9 +319,6 @@ export default {
   created () {
   },
   mounted () {
-   //  let val =
-     localStorage.removeItem('user')
-   //  console.log(JSON.parse(val))
     let modal = document.getElementById('myModal')
     // Listening for when the register modal is called
     EventBus.$on('openModal', eventData => {
