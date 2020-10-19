@@ -17,20 +17,23 @@
   </button>
   <div class="collapse navbar-collapse justify-content-end text-light">
     <ul class="navbar-nav">
-      <li class="nav-item"  data-aos="fade-right">
+      <li class="nav-item"  data-aos="fade-right" data-aos-delay="500">
           <router-link to="/home" class="nav-link px-4">Home</router-link>
       </li>
-      <li class="nav-item" data-aos="fade-right">
+      <li class="nav-item" data-aos="fade-right" data-aos-delay="400">
            <router-link to="/media"  class="nav-link px-4">Media</router-link>
       </li>
-      <li class="nav-item" data-aos="fade-right">
+      <li class="nav-item" data-aos="fade-right" data-aos-delay="300">
            <router-link to="/events"  class="nav-link px-4">Events</router-link>
       </li>
-      <li class="nav-item" data-aos="fade-right">
+      <li class="nav-item" data-aos="fade-right" data-aos-delay="300">
            <router-link to="/live"  class="nav-link px-4">Live</router-link>
       </li>
-       <li class="nav-item"  data-aos="fade-right">
+       <li class="nav-item"  data-aos="fade-right" data-aos-delay="100">
           <router-link to="/about"  class="nav-link px-4">About</router-link>
+      </li>
+      <li class="nav-item"  data-aos="fade-right" v-show="theUser">
+          <p class="nav-link px-4">Hi {{userDetails.first_name}}</p>
       </li>
     </ul>
   </div>
@@ -43,6 +46,9 @@
 </button>
   <div class="inner-content text-light justify-content-center row align-items-center">
     <ul class="navbar-nav">
+      <li class="nav-item py-2" @click="popover = false"  v-show="theUser">
+          <p class="nav-link">Hi {{userDetails.first_name}}</p>
+      </li>
       <li class="nav-item py-2" @click="popover = false">
           <router-link to="/home" class="nav-link">Home</router-link>
       </li>
@@ -73,7 +79,8 @@ export default {
     return {
       bal: this.scroller,
       popover: false,
-      mobileOption: true
+      mobileOption: true,
+      userDetails: {}
     }
   },
   methods: {
@@ -85,6 +92,16 @@ export default {
     scroller: function () {
       let val = document.documentElement.scrollTop
       return val
+    },
+    theUser: function () {
+      let val = localStorage.getItem('user')
+      if (val) {
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.userDetails = JSON.parse(localStorage.getItem('user'))
+        return true
+      } else {
+        return false
+      }
     }
   },
   watch: {
