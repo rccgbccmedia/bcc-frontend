@@ -4,9 +4,12 @@
   <a class="navbar-brand" href="#">
        <img src="../assets/church-logo.png">
   </a>
-  <div class="row pl-2">
-      <p class="d-xs-none d-lg-block w-100 pt-3 heading">THE REDEEMED CHRISTIAN CHURCH OF GOD</p> <br>
-      <p class="d-xs-none d-lg-block w-100 support-text">Bethel Christian Center</p>
+  <div class="row pl-2" id='mobileOption'>
+      <p class="w-100 pt-3 heading">THE REDEEMED CHRISTIAN CHURCH OF GOD</p> <br>
+      <p class="w-100 support-text">Bethel Christian Center</p>
+  </div>
+  <div class="row mt-2 d-sm-none" id='largeScreen'>
+      <p class="w-100 mobile-text">Bethel Christian Center</p>
   </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
     <a class="more-mobile"><img @click="popover = true" src="../assets/more.png"></a>
@@ -38,21 +41,21 @@
    <button type="button" class="close" aria-label="Close" @click="popover = false">
   <img src="../assets/cancel.png">
 </button>
-  <div class="inner-content border text-light justify-content-center row align-items-center">
+  <div class="inner-content text-light justify-content-center row align-items-center">
     <ul class="navbar-nav">
-      <li class="nav-item py-2">
+      <li class="nav-item py-2" @click="popover = false">
           <router-link to="/home" class="nav-link">Home</router-link>
       </li>
-      <li class="nav-item py-2">
+      <li class="nav-item py-2" @click="popover = false">
            <router-link to="/media"  class="nav-link">Media</router-link>
       </li>
-      <li class="nav-item py-2">
+      <li class="nav-item py-2" @click="popover = false">
            <router-link to="/events"  class="nav-link">Events</router-link>
       </li>
-      <li class="nav-item py-2">
+      <li class="nav-item py-2" @click="popover = false">
            <router-link to="/live"  class="nav-link">Live</router-link>
       </li>
-      <li class="nav-item py-2">
+      <li class="nav-item py-2" @click="popover = false">
           <router-link to="/about"  class="nav-link">About</router-link>
       </li>
     </ul>
@@ -69,7 +72,8 @@ export default {
   data () {
     return {
       bal: this.scroller,
-      popover: false
+      popover: false,
+      mobileOption: true
     }
   },
   methods: {
@@ -131,7 +135,7 @@ nav{
   z-index: 1000;
    box-shadow: 0px 6px 8px rgba(19, 19, 19, .7);
   animation: 2s fadeIn forwards .5s;
-  background-color: #000033;
+  background-image: linear-gradient(to left, #e5e5f5, #bcbcf5, #8282f8);;
    position: absolute;
    top: 0;
    right: 0;
@@ -140,11 +144,11 @@ nav{
 }
 .inner-content{
   margin-top: 15vh;
-  margin-left: 25vw;
-  width: 50vw;
+  margin-left: 5vw;
+  width: 40vw;
   height: 70vh;
-  border: 1px solid #000;
-  border-radius: 3rem;
+  border-left: 4px solid #fff;
+  border-radius: 20px;
 }
 .inner-content li.nav-item{
    animation: 2s fadeIn forwards .5s;
@@ -189,6 +193,9 @@ button.close{
 @media only screen and (max-width: 500px){
      .navbar-brand > img {
           max-width: 50px;
+     }
+     #mobileOption{
+       display: none;
      }
 }
 </style>
