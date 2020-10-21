@@ -16,6 +16,18 @@
             <!--<hr>
              <p class="mb-0">Please <span @click="registering = !registering" class="text-link">Sign In</span></p> -->
           </div>
+           <div class="alert alert-warning text-dark" role="alert" v-show="loginError && !registering" id="loginError">
+            <h4 class="alert-heading top-text">Sorry, an error occured!</h4>
+            <p class="top-text">Please check your details and try again</p>
+          </div>
+          <div class="alert alert-warning text-dark" role="alert" v-show="registrationError && registering">
+            <h4 class="alert-heading top-text">Sorry, an error occured!</h4>
+            <p class="top-text">Please check your details and try again</p>
+          </div>
+          <div class="alert alert-warning text-dark" role="alert" v-show="conflictError && registering" id="registrationError">
+            <h4 class="alert-heading top-text">Sorry, User with that email already exists.</h4>
+            <p class="top-text">Please check your details and try again</p>
+          </div>
           <div id='registrationForm' v-if="registering" data-aos="flip-right"   data-aos-duration="1500">
         <form class="text-center">
           <section class="form-head text-dark">
@@ -47,7 +59,7 @@
         <div class="form-row  justify-content-center">
           <div class="form-group col-md-5">
             <label for="phoneNumber">Phone Number</label>
-            <input type="number" class="form-control" id="phoneNumber" required placeholder="+234 012 345 6789" v-model="registerDetails.phoneNumber">
+            <input type="char" class="form-control" id="phoneNumber" required placeholder="+234 012 345 6789" v-model="registerDetails.phoneNumber">
             <small class="text-light">Please provide dailing code</small>
           </div>
           <div class="form-group col-md-5">
@@ -127,6 +139,9 @@ export default {
       forgotForm: false,
       registrationSuccessful: false,
       mailError: false,
+      loginError: false,
+      registrationError: false,
+      conflictError: false,
       loading: false,
       allFields: false,
       mailCheck: false,
@@ -231,9 +246,19 @@ export default {
             this.closeForm()
           // Or immediately redirect to the event register form
           }, 3500)
+        } else if (res.status === 400) {
+          this.loginError = true
+          setTimeout(() => {
+            this.loginError = false
+          }, 3500)
+          console.log('Not working')
         }
       }).catch((err) => {
         this.loginLoading = false
+        this.loginError = true
+        setTimeout(() => {
+          this.loginError = false
+        }, 3500)
         console.log(err)
       }).finally((val) => {
         this.loginDetails.mail = ''
@@ -242,8 +267,8 @@ export default {
     },
     emailCheck (mail, loginMailError) {
       // eslint-disable-next-line no-useless-escape
-      let regex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
-      if (regex.test(mail)) {
+      // let regex = /^([a-z\d\.-]+)@([a-z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/
+      if (mail.includes('@')) {
         if (loginMailError) {
           this.mailError = false
         } else {
@@ -266,7 +291,6 @@ export default {
       }
     },
     confirmDetails () {
-      // console.log(this.registerDetails)
       if (this.registerDetails.email === '' || this.registerDetails.address === '' || this.registerDetails.password === '' || this.registerDetails.phoneNumber === '' || this.registerDetails.firstName === '' || this.registerDetails.lastName === '') {
         this.allFields = true
       } else {
@@ -295,14 +319,25 @@ export default {
       }).then((res) => {
         console.log(res)
         this.loading = false
-        this.registrationSuccessful = true
-        document.setTimeout(() => {
-          this.registrationSuccessful = false
-          this.registering = false
-        }, 3500)
+        if (res.status === 201) {
+          this.registrationSuccessful = true
+          setTimeout(() => {
+            this.registrationSuccessful = false
+            this.registering = false
+          }, 3500)
+        } else if (res.status === 409) {
+          this.conflictError = true
+          setTimeout(() => {
+            this.conflictError = false
+          }, 3500)
+        }
         console.log(res)
       }).catch((err) => {
         this.loading = false
+        this.registrationError = true
+        setTimeout(() => {
+          this.registrationError = false
+        }, 3500)
         console.log(err)
       }).finally((val) => {
         this.registerDetails.email = ''
@@ -388,6 +423,9 @@ section h3 {
   background-position: top right;
   background-origin: padding-box;
   background-repeat: no-repeat;
+}
+#loginError{
+   z-index: 5;
 }
 #registrationSuccessful{
   z-index: 5;
