@@ -1,9 +1,19 @@
 <template>
      <div>
+       <div class="alert alert-success shadow py-4" id="successAlert" role="alert" v-show="success">
+          <span class="close text-right" @click="closeAlert" title="Close Alert">&times;</span>
+          You've successfully registered for this event, please check your mail for more info
+        </div>
+        <div class="alert alert-danger shadow py-4" id="failAlert" role="alert" v-show="failed">
+          <span class="close text-right" @click="closeAlert" title="Close Alert">&times;</span>
+          Sorry, an error occured, please try again
+        </div>
           <div class="row row-cols-1 row-cols-md-2 justify-content-center">
               <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"  data-aos-duration="1500">
     <div class="card border-0" >
-      <img src="../assets/pictures/prayerOne.jpg" class="card-img-top">
+      <!-- https://drive.google.com/file/d/1u4YrtR6jOX1FoTvgMPuNu5CpJDr-Lrpl/view?usp=sharing
+      https://drive.google.com/thumbnail?id=1ZMJt0ALcZnAmuhD0SMz68-sV43kaHM1U -->
+      <img src="https://drive.google.com/uc?id=1u4YrtR6jOX1FoTvgMPuNu5CpJDr-Lrpl" class="card-img-top">
       <div class="card-body text-center">
         <h5 class="card-title">Midweek Celebration Service</h5>
         <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
@@ -51,6 +61,7 @@
 import userModal from '../views/userModal'
 import { EventBus } from '../main'
 import authentication from '../assets/mixins/authenticateUser'
+import axios from 'axios'
 
 export default {
   name: 'EventsView',
@@ -60,24 +71,59 @@ export default {
   },
   data () {
     return {
-      signedIn: false
+      theDetails: localStorage.getItem('user'),
+      success: false,
+      failed: false
     }
   },
   methods: {
     eventRegister (eventData) {
-      if (this.signedIn === false) {
+      if (!this.signedIn) {
         EventBus.$emit('openModal', eventData)
       } else {
         this.registerUser(eventData)
       }
     },
+    closeAlert () {
+      this.success = false
+      this.failed = false
+    },
+    fetchEvents () {
+      axios.get('https://bcc-backend.herokuapp.com/events/all/').then(val => {
+        console.log(val.data)
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
     registerUser (eventData) {
+      axios.get('https://bcc-backend.herokuapp.com/events/rsvp/{id}/').then(val => {
+        console.log(val)
+      }).catch((err) => {
+        console.log(err)
+      }).finally((val) => {
+        this.success = true
+        setTimeout(() => {
+          this.success = false
+        }, 2500)
+      })
     }
   },
   created: {
   },
+  mounted () {
+    // this.fetchEvents()
+  },
   computed: {
-
+    signedIn: function () {
+      let value = false
+      let user = localStorage.getItem('user')
+      if (user) {
+        value = true
+      } else {
+        value = false
+      }
+      return value
+    }
   },
   watch: {
 
@@ -103,6 +149,12 @@ export default {
 }
 .card img{
    transition: .5s ease;
+}
+#successAlert, #failAlert{
+  position: absolute;
+  z-index: 20;
+  margin: 40vh 20vw;
+  width: 40vw;
 }
 .card:hover img{
   opacity: 0.3 !important;
