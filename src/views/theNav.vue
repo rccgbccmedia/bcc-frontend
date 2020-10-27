@@ -18,7 +18,7 @@
   <div class="collapse navbar-collapse justify-content-end text-light">
     <ul class="navbar-nav">
       <li class="nav-item"  data-aos="fade-right" data-aos-delay="500">
-          <router-link to="/home" class="nav-link px-4">Home</router-link>
+          <router-link to="/" class="nav-link px-4">Home</router-link>
       </li>
       <li class="nav-item" data-aos="fade-right" data-aos-delay="400">
            <router-link to="/media"  class="nav-link px-4">Media</router-link>
@@ -50,7 +50,7 @@
           <p class="nav-link">Hi {{userDetails.first_name}}</p>
       </li>
       <li class="nav-item py-2" @click="popover = false">
-          <router-link to="/home" class="nav-link">Home</router-link>
+          <router-link to="/" class="nav-link">Home</router-link>
       </li>
       <li class="nav-item py-2" @click="popover = false">
            <router-link to="/media"  class="nav-link">Media</router-link>
