@@ -51,7 +51,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .jumbotron{
-     background-image: url('../assets/pictures/aboutImg.jpg');
+     background-image: url('https://drive.google.com/uc?id=1C-foaepn8dBC2iKiEEeYUwlwfFVAd5hN');
      background-size: cover;
      background-position: center;
      background-repeat: no-repeat;

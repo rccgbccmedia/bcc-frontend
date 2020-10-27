@@ -10,10 +10,14 @@
           <router-link to="/about" class="footer-link col-md-2 text-center">About Us</router-link><router-link to="/media" class="footer-link text-center col-md-2">Messages</router-link><router-link to="/live" class="footer-link col-md-2 text-center">Live</router-link>
         </div>
         <div class="row justify-content-center socials my-4">
-          <img src="../src/assets/facebook.png" class="col-sm-1 mt-md-2" style="max-width: 55px; height: 25px">
+          <a href="https://www.facebook.com/rccgbcc" target="_blank"> <img src="../src/assets/facebook.png" class="col-sm-1 mt-md-2" style="max-width: 55px; height: 25px"></a>
+           <a href="https://www.instagram.com/rccgbccabuja" target="_blank">
           <img class="col-sm-1 mt-md-2" src="../src/assets/instagram.png"  style="max-width: 55px; height: 25px">
-          <img class="col-sm-1 mt-md-2" src="../src/assets/twitter.png"  style="max-width: 55px; height: 25px">
-          <img class="col-sm-1 mt-md-2 " src="../src/assets/youtube.png"  style="max-width: 55px; height: 25px">
+           </a>
+           <a href="https://www.youtube.com/channel/UCok6SJC0guIVjznAdtScCgQ" target="_blank"> <img class="col-sm-1 mt-md-2 " src="../src/assets/youtube.png"  style="max-width: 55px; height: 25px"></a>
+           <a href="https://mixlr.com/rccgbcc" target="_blank">
+          <img class="col-sm-1 mt-md-2" src="../src/assets/mixlr-icon.png"  style="max-width: 55px; height: 25px">
+          </a>
         </div>
     </footer>
   </div>

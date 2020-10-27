@@ -11,8 +11,6 @@
           <div class="row row-cols-1 row-cols-md-2 justify-content-center">
               <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"  data-aos-duration="1500">
     <div class="card border-0" >
-      <!-- https://drive.google.com/file/d/1u4YrtR6jOX1FoTvgMPuNu5CpJDr-Lrpl/view?usp=sharing
-      https://drive.google.com/thumbnail?id=1ZMJt0ALcZnAmuhD0SMz68-sV43kaHM1U -->
       <img src="https://drive.google.com/uc?id=1u4YrtR6jOX1FoTvgMPuNu5CpJDr-Lrpl" class="card-img-top">
       <div class="card-body text-center">
         <h5 class="card-title">Midweek Celebration Service</h5>
@@ -24,7 +22,7 @@
   </div>
   <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"   data-aos-duration="1500">
     <div class="card border-0" >
-      <img src="../assets/pictures/motherOne.jpg" class="card-img-top">
+      <img src="https://drive.google.com/uc?id=1CmneF-961olCWCIA-KZjiuO5i2bRO2EJ" class="card-img-top">
       <div class="card-body text-center">
         <h5 class="card-title">Sunday Services</h5>
         <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
@@ -34,7 +32,7 @@
   </div>
    <div class="col-sm-10 col-md-5  mb-4" data-aos="flip-right"  data-aos-duration="1500">
     <div class="card border-0">
-      <img src="../assets/pictures/prayerTwo.jpg" class="card-img-top" >
+      <img src="https://drive.google.com/uc?id=1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6" class="card-img-top" >
       <div class="card-body text-center">
         <h5 class="card-title">Thanksgiving Service</h5>
         <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
@@ -44,7 +42,7 @@
   </div>
   <div class="col-sm-10 col-md-5  mb-4" data-aos="flip-right"  data-aos-duration="1500">
     <div class="card border-0">
-      <img src="../assets/pictures/preacher.jpg" class="card-img-top">
+      <img src="https://drive.google.com/uc?id=1CdhJvyqUeYblW7HdOgCV5tiSqOcU1DVj" class="card-img-top">
       <div class="card-body text-center">
         <h5 class="card-title">Special Service</h5>
         <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>

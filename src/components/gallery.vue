@@ -84,13 +84,13 @@ L218.084,312.151z"/>
        <div class="row">
          <div class="col-sm-12 col-md-8 imgShow border-right">
            <div class="row justify-content-center">
-             <img :src='`static/img/${selectedImageSrc}.jpg`' class="shadow rounded mt-4 mb-4" data-aos="slide-left"  data-aos-duration="1500">
+             <img :src='`https://drive.google.com/uc?id=${selectedImageSrc}`' class="shadow rounded mt-4 mb-4" data-aos="slide-left"  data-aos-duration="1500">
            </div>
          </div>
          <div class="col imgScroller border-left">
            <div class="row row-cols-sm-1 row-cols-lg-3">
             <div v-for="(image, index) in galleryImages" :key="index" class=" p-sm-4">
-              <img :src='`static/img/${image.name}.jpg`' :class="{selected: image.selected}" @click="imageClicked(image)">
+              <img :src='`https://drive.google.com/uc?id=${image.name}`' :class="{selected: image.selected}" @click="imageClicked(image)">
             </div>
            </div>
          </div>
@@ -117,38 +117,38 @@ export default {
     return {
       pics: true,
       pic: 'prayerOne',
-      selectedImageSrc: 'threeLadies',
+      selectedImageSrc: '1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6',
       galleryImages: [
         {
-          name: 'prayerOne',
+          name: '1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6',
           selected: false
         },
         {
-          name: 'prayerTwo',
+          name: '1CE8x4R7Ex0LZY6tjeHsGr-N9afhxlIHg',
           selected: false
         },
         {
-          name: 'randomEIght',
+          name: '1BhjGqPVTePm9S_nlHsXVsVkPVXmQoSWb',
           selected: false
         },
         {
-          name: 'randomFive',
+          name: '1DvnJx7ydQH_siBttodiQERa2wao_Z-v2',
           selected: false
         },
         {
-          name: 'threeLadies',
+          name: '1D4a3ZeG97M9J66kRhh6aEYqZ0AM1Pokx',
           selected: true
         },
         {
-          name: 'randomFour',
+          name: '1Cmkpf4VZgybH3CRWJCW2AodotNA4ORFp',
           selected: false
         },
         {
-          name: 'randomOne',
+          name: '1C-foaepn8dBC2iKiEEeYUwlwfFVAd5hN',
           selected: false
         },
         {
-          name: 'randomSeven',
+          name: '1CdhJvyqUeYblW7HdOgCV5tiSqOcU1DVj',
           selected: false
         }
       ]

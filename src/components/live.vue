@@ -17,8 +17,7 @@
 </div>
 <section class="mb-3 p-2">
   <div class="row justify-content-space-between">
-    <iframe class="col-sm-12 col-lg-8 pl-3 img-responsive" id="live" src="https://www.youtube.com/embed/tgbNymZ7vqY" allow="fullscreen" allowfullscreen>
-    </iframe>
+    <iframe src="https://www.youtube.com/embed/4evo7zy_FWs" class="col-sm-12 col-lg-8 pl-3 img-responsive" id="live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <iframe src="https://www.bible.com/bible/1/GEN.1.KJV" id="bible" height="480" width="360" class="col-sm-12 col-lg-4"></iframe>
   </div>
 </section>
