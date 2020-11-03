@@ -22,6 +22,11 @@ export default new Router({
       component: Gallery
     },
     {
+      path: '/passwordReset',
+      name: 'Password-Reset',
+      component: () => import(/* webpackChunkName: "Password-Reset" */ '@/components/forgotPassword.vue')
+    },
+    {
       path: '/events',
       name: 'Events',
       component: Events

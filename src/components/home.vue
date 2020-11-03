@@ -137,10 +137,10 @@ hr{
    /* color: #49499c; */
 }
 .carousel-item .page h1{
-    font-size: 10ch ;
+    font-size: 8ch ;
 }
 .carousel-item .page h2{
-    font-size: 5ch;
+    font-size: 3ch;
 }
 .carousel-item .page span {
   color: rgb(216, 42, 42);
