@@ -88,7 +88,7 @@ L218.084,312.151z"/>
            </div>
          </div>
          <div class="col imgScroller border-left">
-           <div class="row row-cols-sm-1 row-cols-lg-3">
+           <div class="row row-cols-sm-1 row-cols-lg-3 mobileScroller">
             <div v-for="(image, index) in galleryImages" :key="index" class=" p-sm-4">
               <img :src='`https://drive.google.com/uc?id=${image.name}`' :class="{selected: image.selected}" @click="imageClicked(image)">
             </div>
@@ -115,7 +115,7 @@ export default {
   components: {},
   data () {
     return {
-      pics: true,
+      pics: false,
       pic: 'prayerOne',
       selectedImageSrc: '1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6',
       galleryImages: [
@@ -215,7 +215,7 @@ export default {
   overflow-x: hidden;
 }
 img.selected{
-  border: 4px solid #1010b8;
+  border: 4px solid #4b4bbd;
 }
 .imgShow img{
   max-width: 47pc;
@@ -249,10 +249,22 @@ img.selected{
 }
 @media only screen and (max-width: 500px){
   div.imgScroller img{
-    max-width: 55px;
+    max-width: 65px;
+    padding-right: 10px;
   }
-  div.imgScroller {
-    margin-top: 10px;
+  img.selected{
+  border: 2px solid #4b4bbd;
+}
+  div.mobileScroller {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-top: 4px;
+    max-height: 77px;
+   overflow:scroll;
+    white-space: nowrap;
+    scroll-margin: 5px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 }
 </style>

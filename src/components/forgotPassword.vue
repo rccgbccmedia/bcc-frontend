@@ -65,7 +65,7 @@ export default {
       }
     },
     sendToSignIn () {
-        this.$router.push('Events')
+      this.$router.push('Events')
     }
     // resetPassword (){
     // }
