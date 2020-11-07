@@ -36,9 +36,9 @@
 <h3  data-aos="zoom-in" class="section-title text-center py-4 ">BETHEL CHRISTIAN CENTER</h3>
 <hr>
 <section>
-  <div class="media row">
+  <div class="media-thing row">
   <img src="https://drive.google.com/uc?id=1DvnJx7ydQH_siBttodiQERa2wao_Z-v2" class="align-self-center  img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-right">
-  <div class="media-body col" data-aos="fade-left">
+  <div class="media-content col" data-aos="fade-left">
     <h5 class="mt-2 text-center mb-4  py-2"><span><img src="../assets/church-icon.png" class="my-2"> </span>  <br>OUR CHURCH </h5>
     <p class="px-lg-4">Bethel Christian Church is Youth and Young Adult Area Parish of the Redeemed Christian Church of God, Kaduna Youth Province 6. The church has two churches in one location, the expression church and the celebration church. The expression church starts every 7am to 9am on Sundays. </p>
     <p class="mb-0 px-lg-4">It’s a vibrant church for the youth to experience God just as they are. The celebration church is the starts by 9:30 am to 11:30am and its for the young at heart and young adults. BCC is where God lives, rules and reigns. We are building men and woman that will change the world politically, financially and economically using the power of God. </p>
@@ -47,7 +47,7 @@
 </div>
 <hr >
 <div class="media row">
-  <div class="media-body col" data-aos="fade-right">
+  <div class="media-body" data-aos="fade-right">
     <h5 class="mt-0 text-center"> <span><img src="../assets/serviceIcon.png" class="  "> </span> <br> OUR SERVICES </h5>
     <div class="accordion" id="accordionExample">
   <div class="card">
@@ -113,9 +113,9 @@
   </div>
   <img src="https://drive.google.com/uc?id=1CE8x4R7Ex0LZY6tjeHsGr-N9afhxlIHg" class="align-self-center ml-3 img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-left">
 </div>
- <div class="media row">
+ <div class="media-thing row">
   <img src="https://drive.google.com/uc?id=1BhjGqPVTePm9S_nlHsXVsVkPVXmQoSWb" class="align-self-center  img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-right">
-  <div class="media-body col" data-aos="fade-left">
+  <div class="media-content col" data-aos="fade-left">
     <h5 class="mt-2 text-center mb-4  py-2"><span><img src="../assets/video-fileIcon.png" class="my-2"> </span>  <br>SERMONS</h5>
     <p class="px-lg-4">The powerful and undiluted word of God changes your life and transforms families. We urge you to always join us every Sunday and Wednesday  for the word of God. You can also stream our services using our social media handles.</p>
     <!-- <p class="mb-0 px-lg-4">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p> -->
@@ -209,7 +209,7 @@ span.special{
   color: #000033;
   text-decoration: underline;
 }
-.media{
+.media, .media-thing{
   margin: 5rem;
 }
 .jumbotron{
@@ -220,7 +220,7 @@ span.special{
   background-size: 20%, 100%;
   background-repeat: no-repeat;
 }
-.media p, summary, ul li{
+.media p, .media-thing p, summary, ul li{
   letter-spacing: 1px;
   transition: all 1s ease-in-out;
 }
@@ -228,13 +228,13 @@ details:focus {
   border:none;
   outline: none;
 }
-.media p:hover, summary:hover,ul li:hover{
+.media p:hover, .media-thing p:hover, summary:hover,ul li:hover{
   color: #1010b8;
 }
 .media h5:hover{
   font-size: 115%;
 }
-.media h5{
+.media h5, .media-thing h5{
   transition: all 1s ease-in;
     font-size:18px;
     line-height:23px;
@@ -247,18 +247,18 @@ details:focus {
     color:#1f1f1f;
     font-weight: 800;
 }
-.media h5 span > img{
+.media h5 span > img, .media-thing h5 span > img{
   max-width: 35px;
 }
-.media img{
+.media img, .media-thing img{
   aspect-ratio: 1/1;
   transition: transform 2s;
   max-width: 340px;
 }
-.media:hover img{
+.media:hover img, .media-thing:hover img{
   transform: scale(1.1);
 }
-.media-body p::first-letter{
+.media-body p::first-letter, .media-content p::first-letter{
   font-size: 30px;
   font-family: Algerian;
 }
@@ -293,12 +293,15 @@ details:focus {
 @media only screen and (max-width: 770px){
   .jumbotron{
     background-size: 30%, 100%;
-    margin: 0rem 3.9rem;
+    margin: 0rem 1.5rem;
+  }
+  .media-body, .media-content{
+    margin-left: -3rem;
+    margin-right: -3rem;
   }
 }
 @media only screen and (max-width: 500px){
   .jumbotron{
-    margin: 0rem 4rem;
     background-size: 50%, 100%;
   }
 }
