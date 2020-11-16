@@ -32,8 +32,8 @@
        <li class="nav-item"  data-aos="fade-right" data-aos-delay="100">
           <router-link to="/about"  class="nav-link px-4">About</router-link>
       </li>
-      <li class="nav-item"  data-aos="fade-right" v-show="theUser">
-          <p class="nav-link px-4">Hi {{userDetails.first_name}}</p>
+      <li class="nav-item"  data-aos="fade-right" v-show="theUser" @click="logOut">
+          <p class="nav-link px-4" title="Click to log out">Hi {{userDetails.first_name}}</p>
       </li>
     </ul>
   </div>
@@ -47,7 +47,7 @@
   <div class="inner-content text-light justify-content-center row align-items-center">
     <ul class="navbar-nav">
       <li class="nav-item py-2" @click="popover = false"  v-show="theUser">
-          <p class="nav-link">Hi {{userDetails.first_name}}</p>
+          <p class="nav-link">Hi {{userDetails.first_name}} (Click to log out)</p>
       </li>
       <li class="nav-item py-2" @click="popover = false">
           <router-link to="/" class="nav-link">Home</router-link>
@@ -84,7 +84,10 @@ export default {
     }
   },
   methods: {
-
+    logOut () {
+      localStorage.clear()
+      this.popover = false
+    }
   },
   created: {
   },

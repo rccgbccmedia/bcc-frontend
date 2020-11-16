@@ -84,13 +84,13 @@ L218.084,312.151z"/>
        <div class="row">
          <div class="col-sm-12 col-md-8 imgShow border-right">
            <div class="row justify-content-center">
-             <img :src='`https://drive.google.com/uc?id=${selectedImageSrc}`' class="shadow rounded mt-4 mb-4" data-aos="slide-left"  data-aos-duration="1500">
+             <img :src='selectedImageSrc' class="shadow rounded mt-4 mb-4" data-aos="slide-left"  data-aos-duration="1500">
            </div>
          </div>
          <div class="col imgScroller border-left">
            <div class="row row-cols-sm-1 row-cols-lg-3 mobileScroller">
             <div v-for="(image, index) in galleryImages" :key="index" class=" p-sm-4">
-              <img :src='`https://drive.google.com/uc?id=${image.name}`' :class="{selected: image.selected}" @click="imageClicked(image)">
+              <img :src='formatImageLink(image.url)' :class="{selected: image.selected}" @click="imageClicked(image)">
             </div>
            </div>
          </div>
@@ -98,10 +98,9 @@ L218.084,312.151z"/>
      </div>
      <div class="videosTab container-fluid justify-content-center pt-4" v-else>
        <div class="row row-cols-sm-1 row-cols-lg-2  justify-content-center">
-                  <div v-for="n in 10" :key="n" class="justify-content-center p-sm-4">
-         <iframe class="col-sm-12" height="300px" src="https://www.youtube.com/embed/tgbNymZ7vqY" allow="fullscreen" allowfullscreen>
+                  <div v-for="video in theVideos" :key="video.id" class="justify-content-center p-sm-4">
+         <iframe class="col-sm-12" height="300px" :src="formatVideoLink(video.url)" allow="fullscreen" allowfullscreen>
 </iframe>
-<p class="ml-4">This is the Message Title</p>
        </div>
        </div>
      </div>
@@ -110,6 +109,8 @@ L218.084,312.151z"/>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'Gallery',
   components: {},
@@ -117,51 +118,57 @@ export default {
     return {
       pics: false,
       pic: 'prayerOne',
+      theVideos: [],
       selectedImageSrc: '1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6',
       galleryImages: [
-        {
-          name: '1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6',
-          selected: false
-        },
-        {
-          name: '1CE8x4R7Ex0LZY6tjeHsGr-N9afhxlIHg',
-          selected: false
-        },
-        {
-          name: '1BhjGqPVTePm9S_nlHsXVsVkPVXmQoSWb',
-          selected: false
-        },
-        {
-          name: '1DvnJx7ydQH_siBttodiQERa2wao_Z-v2',
-          selected: false
-        },
-        {
-          name: '1D4a3ZeG97M9J66kRhh6aEYqZ0AM1Pokx',
-          selected: true
-        },
-        {
-          name: '1Cmkpf4VZgybH3CRWJCW2AodotNA4ORFp',
-          selected: false
-        },
-        {
-          name: '1C-foaepn8dBC2iKiEEeYUwlwfFVAd5hN',
-          selected: false
-        },
-        {
-          name: '1CdhJvyqUeYblW7HdOgCV5tiSqOcU1DVj',
-          selected: false
-        }
       ]
     }
   },
   methods: {
     imageClicked (image) {
-      this.selectedImageSrc = image.name
+      this.selectedImageSrc = image.url
       this.galleryImages.map(el => {
         el.selected = false
       })
       image.selected = true
+    },
+    formatVideoLink (oldLink) {
+      let rems = oldLink.split('=')
+      let val = rems[1].split('&')
+      return `https://www.youtube.com/embed/${val[0]}`
+    },
+    formatImageLink (oldLink) {
+      let rems = oldLink.split('/')
+      return `https://drive.google.com/uc?id=${rems[5]}`
+    },
+    fetchVideos () {
+      axios.get('https://bcc-backend.herokuapp.com/videos/all/').then((val) => {
+        console.log(val)
+        if (val.status === 200) {
+          this.theVideos = val.data
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    fetchImages () {
+      axios.get('https://bcc-backend.herokuapp.com/images/all/').then((val) => {
+        console.log(val)
+        if (val.status === 200) {
+          this.galleryImages = val.data
+          this.galleryImages.map(img => {
+            img.selected = false
+          })
+          this.galleryImages[0].selected = true
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
     }
+  },
+  beforeMount () {
+    this.fetchVideos()
+    this.fetchImages()
   },
   computed: {
     picColor: function () {

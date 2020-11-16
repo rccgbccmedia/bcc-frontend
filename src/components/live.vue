@@ -24,29 +24,45 @@
 <section class="my-4 p-4">
   <h3 class="text-center my-3 pb-2">OLDER VIDEOS</h3>
   <div class="row justify-content-space-between">
-    <div class="col-xs-12 col-md-6 col-lg-4 text-center"><iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" height="250px" class="w-100" allow="fullscreen" allowfullscreen>
+    <template v-for="video in theVideos">
+    <div class="col-xs-12 col-md-6 col-lg-4 text-center" :key="video.id"><iframe :src="formatVideoLink(video.url)" height="250px" class="w-100" allow="fullscreen" allowfullscreen>
     </iframe>
-    <p class="">This is the Message Description</p></div>
-    <div class="col-xs-12 col-md-6 col-lg-4 text-center"><iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" height="250px" class="w-100" allow="fullscreen" allowfullscreen>
-    </iframe>
-    <p class="">This is the Message Description</p></div>
-    <div class="col-xs-12 col-md-6 col-lg-4 text-center"><iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" height="250px" class="w-100" allow="fullscreen" allowfullscreen>
-    </iframe>
-    <p class="">This is the Message Description</p></div>
+    </div>
+    </template>
   </div>
 </section>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'Live',
   components: {},
   data () {
     return {
+      theVideos: []
     }
   },
   methods: {
+    formatVideoLink (oldLink) {
+      let rems = oldLink.split('=')
+      let val = rems[1].split('&')
+      return `https://www.youtube.com/embed/${val[0]}`
+    },
+    fetchVideos () {
+      axios.get('https://bcc-backend.herokuapp.com/videos/all/').then((val) => {
+        console.log(val)
+        if (val.status === 200) {
+          this.theVideos = val.data.slice(0, 3)
+        }
+      }).catch((err) => {
+        console.log(err)
+      })
+    }
+  },
+  beforeMount () {
+    this.fetchVideos()
   },
   computed: {
   }

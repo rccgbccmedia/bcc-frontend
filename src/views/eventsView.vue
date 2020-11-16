@@ -9,47 +9,21 @@
           Sorry, an error occured, please try again
         </div>
           <div class="row row-cols-1 row-cols-md-2 justify-content-center">
-              <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"  data-aos-duration="1500">
+            <template v-for="event in allEvents.slice(0, theEnd)">
+               <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"  data-aos-duration="1500" :key="event.id">
     <div class="card border-0" >
       <img src="https://drive.google.com/uc?id=1u4YrtR6jOX1FoTvgMPuNu5CpJDr-Lrpl" class="card-img-top">
       <div class="card-body text-center">
-        <h5 class="card-title">Midweek Celebration Service</h5>
-        <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+        <h5 class="card-title">{{event.name}}</h5>
+        <p class="card-text">{{event.description}}</p>
+        <p class="card-text">{{event.venue}}</p>
+        <p class="card-text">{{event.time | formatDate}}</p>
         <button class="col-sm-3 justify-content-center card-button" @click="eventRegister('eventName')">Register</button>
       </div>
 
     </div>
   </div>
-  <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"   data-aos-duration="1500">
-    <div class="card border-0" >
-      <img src="https://drive.google.com/uc?id=1CmneF-961olCWCIA-KZjiuO5i2bRO2EJ" class="card-img-top">
-      <div class="card-body text-center">
-        <h5 class="card-title">Sunday Services</h5>
-        <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <button class="col-sm-3 justify-content-center card-button" @click="eventRegister('eventName')">Register</button>
-      </div>
-    </div>
-  </div>
-   <div class="col-sm-10 col-md-5  mb-4" data-aos="flip-right"  data-aos-duration="1500">
-    <div class="card border-0">
-      <img src="https://drive.google.com/uc?id=1B7j0_Qm5aOZUYvE8a4rVx4Yr8cbAzHW6" class="card-img-top" >
-      <div class="card-body text-center">
-        <h5 class="card-title">Thanksgiving Service</h5>
-        <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <button class="col-sm-3 justify-content-center card-button" @click="eventRegister('eventName')">Register</button>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-10 col-md-5  mb-4" data-aos="flip-right"  data-aos-duration="1500">
-    <div class="card border-0">
-      <img src="https://drive.google.com/uc?id=1CdhJvyqUeYblW7HdOgCV5tiSqOcU1DVj" class="card-img-top">
-      <div class="card-body text-center">
-        <h5 class="card-title">Special Service</h5>
-        <p class="card-text">Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
-          <button class="col-sm-3 justify-content-center card-button" @click="eventRegister('eventName')">Register</button>
-      </div>
-    </div>
-  </div>
+            </template>
 </div>
 <userModal></userModal>
      </div>
@@ -60,23 +34,39 @@ import userModal from '../views/userModal'
 import { EventBus } from '../main'
 import authentication from '../assets/mixins/authenticateUser'
 import axios from 'axios'
-
+import moment from 'moment'
 export default {
   name: 'EventsView',
   mixins: [authentication],
   components: {
     userModal
   },
+  props: {
+    limit: {
+      type: Boolean
+    }
+  },
   data () {
     return {
       theDetails: localStorage.getItem('user'),
       success: false,
-      failed: false
+      failed: false,
+      allEvents: []
+    }
+  },
+  filters: {
+    formatDate: function (value) {
+      if (!value) return ''
+      let theFullDate = value.split('T')
+      let theTime = theFullDate[1].split(':')
+      theTime.pop()
+      return moment(theFullDate[0]).format('LL') + ' | ' + moment(`${parseInt(theTime[0])},${parseInt(theTime[1])}`, 'hh, mm').format('LT')
     }
   },
   methods: {
-    eventRegister (eventData) {
-      if (!this.signedIn) {
+    async eventRegister (eventData) {
+      console.log(localStorage.getItem('user'))
+      if (!localStorage.getItem('user')) {
         EventBus.$emit('openModal', eventData)
       } else {
         this.registerUser(eventData)
@@ -88,12 +78,16 @@ export default {
     },
     fetchEvents () {
       axios.get('https://bcc-backend.herokuapp.com/events/all/').then(val => {
-        console.log(val.data)
+        console.log(val)
+        if (val.status === 200) {
+          this.allEvents = val.data
+        }
       }).catch((err) => {
         console.log(err)
       })
     },
     registerUser (eventData) {
+      console.log('logg')
       axios.get('https://bcc-backend.herokuapp.com/events/rsvp/{id}/').then(val => {
         console.log(val)
       }).catch((err) => {
@@ -108,8 +102,8 @@ export default {
   },
   created: {
   },
-  mounted () {
-    // this.fetchEvents()
+  beforeMount () {
+    this.fetchEvents()
   },
   computed: {
     signedIn: function () {
@@ -121,6 +115,13 @@ export default {
         value = false
       }
       return value
+    },
+    theEnd: function () {
+      if (this.limit) {
+        return this.limit
+      } else {
+        return this.allEvents.length
+      }
     }
   },
   watch: {

@@ -128,9 +128,10 @@
 <h3  data-aos="zoom-in" class="section-title text-center py-4">OUR PROGRAMS</h3>
 <hr>
 <section class="mt-4 pt-4">
-<events></events>
+<events limit="2"></events>
+<router-link to="/events"  class="row justify-content-center mb-4"><button class="media-btn">View more events</button></router-link>
 </section>
-<div class="jumbotron mb-4" data-aos="flip-left"
+<div class="jumbotron mt-4" data-aos="flip-left"
      data-aos-easing="ease-out-cubic"
      data-aos-duration="1500">
   <div class="container text-right">
