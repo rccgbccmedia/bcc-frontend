@@ -8,8 +8,8 @@
       <p class="w-100 pt-3 heading">THE REDEEMED CHRISTIAN CHURCH OF GOD</p> <br>
       <p class="w-100 support-text">Bethel Christian Center</p>
   </div>
-  <div class="row mt-2 d-sm-none" id='largeScreen'>
-      <p class="w-100 mobile-text">Bethel Christian Center</p>
+  <div class="row pt-3 d-sm-none" id='largeScreen'>
+      <p class="w-70">Bethel Christian Center</p>
   </div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
     <a class="more-mobile"><img @click="popover = true" src="../assets/more.png"></a>
@@ -32,7 +32,7 @@
        <li class="nav-item"  data-aos="fade-right" data-aos-delay="100">
           <router-link to="/about"  class="nav-link px-4">About</router-link>
       </li>
-      <li class="nav-item"  data-aos="fade-right" v-show="theUser" @click="logOut">
+      <li class="nav-item"  data-aos="fade-right" v-show="userOnline" @click="logOut">
           <p class="nav-link px-4" title="Click to log out">Hi {{userDetails.first_name}}</p>
       </li>
     </ul>
@@ -46,8 +46,8 @@
 </button>
   <div class="inner-content text-light justify-content-center row align-items-center">
     <ul class="navbar-nav">
-      <li class="nav-item py-2" @click="popover = false"  v-show="theUser">
-          <p class="nav-link">Hi {{userDetails.first_name}} (Click to log out)</p>
+      <li class="nav-item py-2" @click="logOut"  v-show="userOnline">
+          <p class="nav-link">Hi {{userDetails.first_name}} <br> (Click to log out)</p>
       </li>
       <li class="nav-item py-2" @click="popover = false">
           <router-link to="/" class="nav-link">Home</router-link>
@@ -72,7 +72,7 @@
 </template>
 
 <script>
-
+import { EventBus } from '../main'
 export default {
   name: 'Navbar',
   data () {
@@ -80,16 +80,27 @@ export default {
       bal: this.scroller,
       popover: false,
       mobileOption: true,
+      userOnline: false,
       userDetails: {}
     }
   },
   methods: {
     logOut () {
       localStorage.clear()
+      this.userOnline = false
       this.popover = false
     }
   },
   created: {
+  },
+  mounted () {
+    EventBus.$on('openModal', eventData => {
+      this.logOut()
+    })
+    EventBus.$on('nowOnline', eventData => {
+      this.userOnline = true
+      this.userDetails = JSON.parse(localStorage.getItem('user'))
+    })
   },
   computed: {
     scroller: function () {
@@ -125,6 +136,9 @@ nav{
   opacity: 0.8;
   font-size: 20px;
   font-family: 'Imprima', sans-serif;
+}
+#largeScreen{
+  margin-left: -60px;
 }
 .more-mobile >img, button.close > img{
      max-width: 1.1rem;
@@ -213,6 +227,7 @@ button.close{
 @media only screen and (max-width: 500px){
      .navbar-brand > img {
           max-width: 50px;
+          padding-right: 10px;
      }
      #mobileOption{
        display: none;

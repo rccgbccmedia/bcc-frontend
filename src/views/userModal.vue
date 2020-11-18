@@ -198,7 +198,7 @@ export default {
       arrayStuff[0] = await localStorage.getItem('user')
       arrayStuff[1] = await localStorage.getItem('accessToken')
       arrayStuff[2] = await localStorage.getItem('refreshToken')
-      console.table(arrayStuff)
+      EventBus.$emit('nowOnline')
     },
     passwordReset () {
       // console.log('Reseting Password')

@@ -37,7 +37,7 @@
 <hr>
 <section>
   <div class="media-thing row">
-  <img src="https://drive.google.com/uc?id=1DvnJx7ydQH_siBttodiQERa2wao_Z-v2" class="align-self-center  img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-right">
+  <img src="https://drive.google.com/uc?id=1DvnJx7ydQH_siBttodiQERa2wao_Z-v2" class="align-self-center shadow px-0 img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-right">
   <div class="media-content col" data-aos="fade-left">
     <h5 class="mt-2 text-center mb-4  py-2"><span><img src="../assets/church-icon.png" class="my-2"> </span>  <br>OUR CHURCH </h5>
     <p class="px-lg-4">Bethel Christian Church is Youth and Young Adult Area Parish of the Redeemed Christian Church of God, Kaduna Youth Province 6. The church has two churches in one location, the expression church and the celebration church. The expression church starts every 7am to 9am on Sundays. </p>
@@ -111,10 +111,10 @@
 </div>
     <router-link to="/events"  class="row justify-content-start m-4"><button class="media-btn">See More</button></router-link>
   </div>
-  <img src="https://drive.google.com/uc?id=1CE8x4R7Ex0LZY6tjeHsGr-N9afhxlIHg" class="align-self-center ml-3 img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-left">
+  <img src="https://drive.google.com/uc?id=1CE8x4R7Ex0LZY6tjeHsGr-N9afhxlIHg" class="align-self-center shadow px-0 ml-3 img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-left">
 </div>
  <div class="media-thing row">
-  <img src="https://drive.google.com/uc?id=1BhjGqPVTePm9S_nlHsXVsVkPVXmQoSWb" class="align-self-center  img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-right">
+  <img src="https://drive.google.com/uc?id=1BhjGqPVTePm9S_nlHsXVsVkPVXmQoSWb" class="align-self-center shadow px-0 img-responsive col-xs-12 col-lg-4" alt="media image one" data-aos="fade-right">
   <div class="media-content col" data-aos="fade-left">
     <h5 class="mt-2 text-center mb-4  py-2"><span><img src="../assets/video-fileIcon.png" class="my-2"> </span>  <br>SERMONS</h5>
     <p class="px-lg-4">The powerful and undiluted word of God changes your life and transforms families. We urge you to always join us every Sunday and Wednesday  for the word of God. You can also stream our services using our social media handles.</p>

@@ -6,7 +6,8 @@
         </div>
         <div class="alert alert-danger shadow py-4" id="failAlert" role="alert" v-show="failed">
           <span class="close text-right" @click="closeAlert" title="Close Alert">&times;</span>
-          Sorry, an error occured, please try again
+          Sorry, an error occured, please try again. <br>
+          If this persists, please sign in again.
         </div>
         <div class="alert alert-danger shadow py-4" id="loginAlert" role="alert" v-show="login">
           <span class="close text-right" @click="closeAlert" title="Close Alert">&times;</span>
@@ -104,9 +105,9 @@ export default {
         console.log(val)
         if (val.status === 201) {
           this.success = true
-          setTimeout(() => {
-            this.success = false
-          }, 4399)
+          // setTimeout(() => {
+          //   this.success = false
+          // }, 4399)
         }
       }).catch((err) => {
         console.log({err})
@@ -118,9 +119,10 @@ export default {
           }, 3290)
         } else {
           this.failed = true
-          setTimeout(() => {
-            this.failed = false
-          }, 2090)
+
+          // setTimeout(() => {
+          //   this.failed = false
+          // }, 2090)
         }
       }).finally((val) => {
         // this.success = true

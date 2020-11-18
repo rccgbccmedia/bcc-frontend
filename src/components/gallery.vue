@@ -126,11 +126,14 @@ export default {
   },
   methods: {
     imageClicked (image) {
-      this.selectedImageSrc = image.url
+      this.selectedImageSrc = this.formatImageLink(image.url)
       this.galleryImages.map(el => {
-        el.selected = false
+        if (el.id === image.id) {
+          el.selected = true
+        } else {
+          el.selected = false
+        }
       })
-      image.selected = true
     },
     formatVideoLink (oldLink) {
       let rems = oldLink.split('=')
@@ -159,7 +162,7 @@ export default {
           this.galleryImages.map(img => {
             img.selected = false
           })
-          this.galleryImages[0].selected = true
+          this.imageClicked(this.galleryImages[0])
         }
       }).catch((err) => {
         console.log(err)
