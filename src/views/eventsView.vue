@@ -8,6 +8,10 @@
           <span class="close text-right" @click="closeAlert" title="Close Alert">&times;</span>
           Sorry, an error occured, please try again
         </div>
+        <div class="alert alert-danger shadow py-4" id="loginAlert" role="alert" v-show="login">
+          <span class="close text-right" @click="closeAlert" title="Close Alert">&times;</span>
+          Sorry, an error occured, please sign in again
+        </div>
           <div class="row row-cols-1 row-cols-md-2 justify-content-center">
             <template v-for="event in allEvents.slice(0, theEnd)">
                <div class="col-sm-10 col-md-5 mb-4" data-aos="flip-left"  data-aos-duration="1500" :key="event.id">
@@ -18,7 +22,7 @@
         <p class="card-text">{{event.description}}</p>
         <p class="card-text">{{event.venue}}</p>
         <p class="card-text">{{event.time | formatDate}}</p>
-        <button class="col-sm-3 justify-content-center card-button" @click="eventRegister('eventName')">Register</button>
+        <button class="col-sm-3 justify-content-center card-button" @click="eventRegister(event)">Register</button>
       </div>
 
     </div>
@@ -51,6 +55,7 @@ export default {
       theDetails: localStorage.getItem('user'),
       success: false,
       failed: false,
+      login: false,
       allEvents: []
     }
   },
@@ -75,6 +80,7 @@ export default {
     closeAlert () {
       this.success = false
       this.failed = false
+      this.login = false
     },
     fetchEvents () {
       axios.get('https://bcc-backend.herokuapp.com/events/all/').then(val => {
@@ -87,16 +93,40 @@ export default {
       })
     },
     registerUser (eventData) {
-      console.log('logg')
-      axios.get('https://bcc-backend.herokuapp.com/events/rsvp/{id}/').then(val => {
+      console.log('rsvp in process')
+      console.log(localStorage.getItem('accessToken'))
+      axios.post(`https://bcc-backend.herokuapp.com/events/${eventData.id}/rsvp/`, {}, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      }).then(val => {
         console.log(val)
+        if (val.status === 201) {
+          this.success = true
+          setTimeout(() => {
+            this.success = false
+          }, 4399)
+        }
       }).catch((err) => {
-        console.log(err)
+        console.log({err})
+        if (err.request.status == '401') {
+          this.login = true
+          setTimeout(() => {
+            this.login = false
+            EventBus.$emit('openModal', eventData)
+          }, 3290)
+        } else {
+          this.failed = true
+          setTimeout(() => {
+            this.failed = false
+          }, 2090)
+        }
       }).finally((val) => {
-        this.success = true
-        setTimeout(() => {
-          this.success = false
-        }, 2500)
+        // this.success = true
+        // setTimeout(() => {
+        //   this.success = false
+        // }, 2500)
       })
     }
   },
@@ -149,11 +179,11 @@ export default {
 .card img{
    transition: .5s ease;
 }
-#successAlert, #failAlert{
+#successAlert, #failAlert, #loginAlert{
   position: absolute;
   z-index: 20;
-  margin: 40vh 20vw;
-  width: 40vw;
+  margin: 30vh 20vw;
+  width: 45vw;
 }
 .card:hover img{
   opacity: 0.3 !important;

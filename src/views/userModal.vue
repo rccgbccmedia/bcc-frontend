@@ -78,6 +78,7 @@
         <button type="submit" class="btn btn-primary" @click.prevent="confirmDetails" v-if="!loading">Register</button>
           <img src="../assets/loading.gif" v-else>
         <section class="pt-4 form-footer">
+           <hr>
           <h5>Already a member? <br> Please <span @click="registering = !registering" class="text-link">Sign In</span></h5>
         </section>
       </form>
@@ -107,6 +108,7 @@
               <button type="submit" class="btn btn-primary" @click.prevent="confirmLogin" v-if="!loginLoading"><span v-if="forgotForm">Reset Password</span><span v-else>Login</span></button>
                <img src="../assets/loading.gif" v-else>
               <section class="pt-4 form-footer">
+                 <hr>
                 <h5 >Don't have an account? <br> Please <span @click="registering = !registering" class="text-link">Register here</span></h5>
                 <h6 class="text-link" @click="forgotForm = !forgotForm"><span v-if="forgotForm">Back to Login</span><span v-else>Forgot Password?</span></h6>
               </section>
