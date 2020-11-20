@@ -4,18 +4,21 @@
      <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active text-light bg-dark">
+      <div class="header__bg"></div>
         <div class="page mt-md-4 pt-md-4 pl-4 ml-4">
            <h1 class=" text-left">WELCOME</h1>
            <h2 class=" text-left">TO A <span>CHRIST-CENTERED</span> FAMILY</h2>
         </div>
     </div>
      <div class="carousel-item text-light bg-dark">
+        <div class="header__bg"></div>
         <div class="page mt-md-4 pt-md-4 pl-4 ml-4 text-light">
           <h1 class=" text-left"> <span>JOIN US</span></h1>
            <h2 class=" text-left"> FOR ANY OF OUR SERVICES</h2>
         </div>
     </div>
     <div class="carousel-item text-light bg-dark">
+       <div class="header__bg"></div>
         <div class="page mt-md-4 pt-md-4 pl-4 ml-4">
            <h1 class=" text-left">YOU CAN <span>JOIN US </span></h1>
            <h2 class=" text-left">IN OUR LIVE SERVICES</h2>
@@ -32,8 +35,7 @@
   </a>
 </div>
 <!-- Carousel  Ends-->
-<hr>
-<h3  data-aos="zoom-in" class="section-title text-center py-4 ">BETHEL CHRISTIAN CENTER</h3>
+<h3 class="section-title text-right pr-4 mr-4">BETHEL CHRISTIAN CENTER</h3>
 <hr>
 <section>
   <div class="media-thing row">
@@ -162,6 +164,21 @@ export default {
 <style scoped>
 .carousel-item{
   height: 30rem;
+  position: relative;
+  overflow: hidden;
+}
+.header__bg{
+   position: absolute;
+  top: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-image: linear-gradient(#ffffff);
+  transform: skewY(-6deg);
+  transform-origin: top left;
+
 }
 .carousel-item h4{
   font-size: 40px;
@@ -210,7 +227,10 @@ span.special{
   color: #000033;
   text-decoration: underline;
 }
-.media, .media-thing{
+.media-thing {
+  margin: 1rem 5rem 5rem 5rem;
+}
+.media{
   margin: 5rem;
 }
 .jumbotron{
@@ -243,6 +263,7 @@ details:focus {
     font-weight: 800;
 }
 .section-title{
+    padding-bottom:20px ;
     font-size:30px;
     line-height:23px;
     color:#1f1f1f;
