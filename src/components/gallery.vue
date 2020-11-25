@@ -228,7 +228,8 @@ img.selected{
   border: 4px solid #4b4bbd;
 }
 .imgShow img{
-  max-width: 47pc;
+  max-width: 60vw;
+  max-height: 80vh;
 }
 .imgScroller img{
   max-width: 135px;
@@ -262,6 +263,14 @@ img.selected{
     max-width: 65px;
     padding-right: 10px;
   }
+  div.imgShow{
+    margin-top: 6.3rem;
+    margin-left: 0.5rem;
+  }
+  .imgShow img{
+  max-width: 80vw;
+  max-height: 80vh;
+}
   img.selected{
   border: 2px solid #4b4bbd;
 }
